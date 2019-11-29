@@ -1,8 +1,7 @@
 package com.company;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Random;
 
 public class Room {
@@ -12,13 +11,15 @@ public class Room {
 
  private int n = rand.nextInt(3);
 
- private ArrayList<String> inhabs = new ArrayList<>();
+ private ArrayList<Creature> inhabs = new ArrayList<>();
 
+ private Spider spider = new Spider("Lilla Spindel", 10, 1);
+ private Spider nullspider = new Spider("nullSPider", 0, 0);
 
  private int xPosition = 0;
  private int yPosition = 0;
 
- public Room(int xPosition, int yPosition){
+ private Room(int xPosition, int yPosition){
 
   this.xPosition = xPosition;
   this.yPosition = yPosition;
@@ -35,34 +36,32 @@ public class Room {
 
  }
 
-public void roomInhab(){
-  if(n == 1){
-   inhabs.add("B");}
-  else if(n == 2){
-   inhabs.add("S");
+private void roomInhab(){
+     if(n == 2){
+   inhabs.add(spider);
   }
-  else{
-   inhabs.add("0");
+  else   {inhabs.add(nullspider);}
+
   }
-  };
 
 
- public int getMazeRoom() {
-  return this.xPosition;
 
- }
+
 
  @Override
  public String toString() {
-  String outputString = "";
+  String outputString = "[0]";
 
 
 
-  for (int i = 0; i < inhabs.size(); i++) {
-
-    outputString += " " + inhabs.get(i);
-
-  }
-  return outputString;
+ if(inhabs.get(0) == spider){
+     return "Spider";
  }
-}
+
+ else if(inhabs.get(0) == nullspider){
+         return "NullSpider";
+     }
+
+ return outputString;
+
+}}

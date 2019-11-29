@@ -12,6 +12,29 @@ public abstract class Creature {
     }
 
     //Skriva attack
+    public void attack() {
 
+    }
     //Skriva ta skada
+    public abstract void getDamaged(int damageAmount);
+
+    public String getName() {
+        return name;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void increaseHealth(int health) {
+        this.health += health;
+    }
+
+    public void increaseDamage(int damage) {
+        this.damage += damage;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
 }

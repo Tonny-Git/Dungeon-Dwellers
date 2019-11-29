@@ -13,8 +13,8 @@ public class Room {
 
  private ArrayList<Creature> inhabs = new ArrayList<>();
 
- private Spider spider = new Spider("Lilla Spindel", 10, 1);
- private Spider nullspider = new Spider("nullSPider", 0, 0);
+ private Spider spider = new Spider(10, 1);
+private Bandit bandit = new Bandit(20, 2);
 
  private int xPosition = 0;
  private int yPosition = 0;
@@ -40,7 +40,7 @@ private void roomInhab(){
      if(n == 2){
    inhabs.add(spider);
   }
-  else   {inhabs.add(nullspider);}
+  else   {inhabs.add(bandit);}
 
   }
 
@@ -55,11 +55,11 @@ private void roomInhab(){
 
 
  if(inhabs.get(0) == spider){
-     return "Spider";
+     outputString = "[S]";
  }
 
- else if(inhabs.get(0) == nullspider){
-         return "NullSpider";
+ else if(inhabs.get(0) == bandit){
+         outputString = "[B]";
      }
 
  return outputString;

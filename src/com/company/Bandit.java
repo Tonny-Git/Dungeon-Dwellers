@@ -2,7 +2,8 @@ package com.company;
 
 public class Bandit extends Monster {
 
-    public Bandit(String name, int health, int damage) {
-        super(name, health, damage);
+    public Bandit(int health, int damage) {
+        super("Bandit", health, damage);
+        setExperiencePoints(100);
     }
 }

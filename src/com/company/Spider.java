@@ -2,7 +2,8 @@ package com.company;
 
 public class Spider extends Monster {
 
-    public Spider(String name, int health, int damage) {
-        super(name, health, damage);
+    public Spider(int health, int damage) {
+        super("Spider", health, damage);
+        setExperiencePoints(50);
     }
 }

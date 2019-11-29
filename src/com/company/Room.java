@@ -19,7 +19,7 @@ public class Room {
  private int xPosition = 0;
  private int yPosition = 0;
 
- private Room(int xPosition, int yPosition){
+ public Room(int xPosition, int yPosition){
 
   this.xPosition = xPosition;
   this.yPosition = yPosition;

@@ -2,13 +2,15 @@ package com.company;
 
 import java.util.Scanner;
 
-public class Maze {
+
+ public class Maze {
 
     private String wall = "W";
     private String door = "D";
     private String hero = "H";
     private int mapSize = 15;
     private Room[][] mazeArray;
+
 
 
     public Maze() {
@@ -23,16 +25,19 @@ public class Maze {
 
         mazeArray = new Room[mapSize][mapSize];
 
+        System.out.println(mazeArray);
+
         for (int col = 0; col < mazeArray.length; col++) {
             for (int row = 0; row < mazeArray.length; row++) {
                 if (mazeArray[col][row] == (mazeArray[col][0]) || (mazeArray[col][row] == (mazeArray[0][row]))) {
-                    mazeArray[col][row] = new Room(EMPTY);
+                    mazeArray[col][row] = new Room(col, row);
                 } else {
-                    mazeArray[col][row] = new Room();
+                    mazeArray[col][row] = new Room(col,row);
                 }
-                mazeArray[1][14] = new Room(EMPTY);
+                mazeArray[1][14] = new Room(col, row);
             }
         }
+        System.out.println(mazeArray);
     }
 
     public Room getMazeRoom(int xPosition, int yPosition) {

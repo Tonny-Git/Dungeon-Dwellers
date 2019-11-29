@@ -50,9 +50,8 @@ public class DungeonGame {
         System.out.println("--- Loading map ---");
 
         this.maze = new Maze();
-        this.hero = new Hero();
+        this.hero = new Hero(1,14, "Pelle");
 
-        hero.setPosition(1, 14);
 
         Scanner scanner = new Scanner(System.in);
 
@@ -68,33 +67,33 @@ public class DungeonGame {
 
         switch (whereoTo) {
             case 1:
-                hero.setYPosition(yPostion - 1);
+                hero.setPosY( hero.getPositionY() - 1);
                 enterRoom();
                 break;
             case 2:
-                hero.setYPosition(yPosition + 1);
+                hero.setPosY(hero.getPositionY() + 1);
                 break;
             case 3:
-                hero.setXPosition(xPosition - 1);
+                hero.setPosX(hero.getPositionX() - 1);
                 break;
             case 4:
-                hero.setXPosition(xPosition + 1);
+                hero.setPosX(hero.getPositionX() + 1);
                 break;
 
         }
     }
 
     private void enterRoom() {
-        if (maze.getMazeRoom(hero.xPosition, hero.yPosition).MONSTER) {
+        if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()) == null) {
             fight();
 
-        } else if (maze.getMazeRoom(hero.xPosition, hero.yPosition).TREASURE) {
+        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()) == null) {
             treasure();
 
-        } else if (maze.getMazeRoom(hero.xPosition, hero.yPosition).EMPTY) {
+        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()) == null) {
             empty();
 
-        } else if (maze.getMazeRoom(hero.xPosition, hero.yPosition)..BOSS){
+        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()) == null){
             bossFight();
 
         }
@@ -110,7 +109,7 @@ public class DungeonGame {
     }
 
     private void fight() {
-        System.out.println(hero + "encountered" + maze.getMazeArray()[hero.getXposition][hero.getYposition].MONSTER);
+        System.out.println(hero + "encountered" + maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()));
 
         System.out.println("1. Fight \n" +
                 "2. Flee \n" +
@@ -136,7 +135,7 @@ public class DungeonGame {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("You found a treasure!");
-        int randomNum = ThreadLocalRandom.current().nextInt(0, itemArray.length);
+        int randomNum = ThreadLocalRandom.current().nextInt(0 - itemArray.length +1);
         System.out.println("You found " + itemArray[randomNum] + "\n" +
                 "Do you want to pick up item? Y / N? ");
 

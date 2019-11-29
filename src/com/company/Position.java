@@ -1,6 +1,6 @@
 package com.company;
 
-public class Position {
+public abstract class Position {
 
     private int posX;
     private int posY;
@@ -11,12 +11,22 @@ public class Position {
         this.posY = poxY;
     }
 
-    public int getPosition() {
-        return posX + posY;
+    public int getPositionX() {
+        return posX;
     }
 
-    public void setPosX(int posX, int posY) {
+    public int getPositionY() {
+        return posY;
+    }
+
+    public void setPosition(int posX, int posY) {
         this.posX = posX;
+        this.posY = posY;
+    }
+    public void setPosX(int posX){
+        this.posX = posX;
+    }
+    public void setPosY(int posY) {
         this.posY = posY;
     }
 }

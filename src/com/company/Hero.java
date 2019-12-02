@@ -39,4 +39,13 @@ public class Hero extends Creature {
         }
     }
 
+    public void attackEnemy(Creature attackCreature) {
+        handleNormalAttack(attackCreature);
+    }
+
+    public void handleSpecialAttack(Creature attackCreature, int damage) {
+        attackCreature.getDamaged(damage);
+        System.out.printf("%s did a critical attack for %d damage.", getName(), damage);
+    }
+
 }

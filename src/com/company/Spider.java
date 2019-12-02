@@ -6,4 +6,8 @@ public class Spider extends Monster {
         super("Spider", health, damage);
         setExperiencePoints(50);
     }
+
+    public void attackEnemy(Creature attackCreature) {
+
+    }
 }

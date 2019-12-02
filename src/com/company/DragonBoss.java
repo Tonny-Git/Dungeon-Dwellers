@@ -3,8 +3,8 @@ package com.company;
 public class DragonBoss extends Monster{
     private boolean activeQuest = false;
 
-    public DragonBoss(int health, int damage) {
-        super("Elder Dragon", health, damage);
+    public DragonBoss() {
+        super("Elder Dragon", 300, 20);
         setExperiencePoints(1000);
     }
 
@@ -19,7 +19,15 @@ public class DragonBoss extends Monster{
     }
 
     //Special Attack
-
+    public void attackEnemy(Creature attackCreature) {
+        int typeOfAttack = (int)Math.floor(Math.random() * 100);
+        System.out.println(typeOfAttack);
+        if(typeOfAttack < 10) {
+            handleSpecialAttack(attackCreature, getDamage()+10);
+        } else {
+            handleNormalAttack(attackCreature);
+        }
+    }
 
     public boolean isActiveQuest() {
         return activeQuest;

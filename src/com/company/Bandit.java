@@ -6,4 +6,8 @@ public class Bandit extends Monster {
         super("Bandit", health, damage);
         setExperiencePoints(100);
     }
+
+    public void attackEnemy(Creature attackCreature) {
+
+    }
 }

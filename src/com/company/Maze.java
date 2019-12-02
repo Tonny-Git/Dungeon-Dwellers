@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Maze {
 
@@ -40,6 +41,14 @@ public class Maze {
         return mazeArray[xPosition][yPosition];
 
     }
+    private void calulateIfWallOrNot() {
+        int randomNum = ThreadLocalRandom.current().nextInt(0, 2 + 1);
+
+        if (  )
+
+    }
+
+
 
     @Override
     public String toString() {

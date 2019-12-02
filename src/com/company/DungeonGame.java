@@ -4,9 +4,9 @@ import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class DungeonGame {
-/*
 
     private Maze maze;
+    private Hero hero;
 
     public DungeonGame() {
         mainMenu();
@@ -50,7 +50,7 @@ public class DungeonGame {
         System.out.println("--- Loading map ---");
 
         this.maze = new Maze();
-        this.hero = new Hero(1,14, "Pelle");
+        this.hero = new Hero(1, 14, "Pelle");
 
 
         Scanner scanner = new Scanner(System.in);
@@ -67,7 +67,7 @@ public class DungeonGame {
 
         switch (whereoTo) {
             case 1:
-                hero.setPosY( hero.getPositionY() - 1);
+                hero.setPosY(hero.getPositionY() - 1);
                 enterRoom();
                 break;
             case 2:
@@ -93,7 +93,7 @@ public class DungeonGame {
         } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()) == null) {
             empty();
 
-        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()) == null){
+        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()) == null) {
             bossFight();
 
         }
@@ -135,7 +135,7 @@ public class DungeonGame {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("You found a treasure!");
-        int randomNum = ThreadLocalRandom.current().nextInt(0 - itemArray.length +1);
+        int randomNum = ThreadLocalRandom.current().nextInt(0 - itemArray.length + 1);
         System.out.println("You found " + itemArray[randomNum] + "\n" +
                 "Do you want to pick up item? Y / N? ");
 
@@ -143,15 +143,11 @@ public class DungeonGame {
         if (input.toLowerCase() == "y") {
             hero.addItem(itemArray[randomNum]);
             System.out.println("Picked up item");
-        }
-        else if (input.toLowerCase() == "n") {
+        } else if (input.toLowerCase() == "n") {
             System.out.println("Left item");
-        }
-        else {
+        } else {
             System.out.println("You fucked up. " + "Lost 2 HP for being stupid ");
             hero.setHealth(-2);
         }
     }
-
- */
 }

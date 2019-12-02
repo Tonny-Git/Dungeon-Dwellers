@@ -12,10 +12,12 @@ public abstract class Creature {
     }
 
     //Skriva attack
-    public void attack() {
-
+    public void handleNormalAttack(Creature attackCreature) {
+        attackCreature.getDamaged(damage);
     }
-    //Skriva ta skada
+
+    public abstract void attackEnemy();
+
     public abstract void getDamaged(int damageAmount);
 
     public String getName() {

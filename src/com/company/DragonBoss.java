@@ -21,7 +21,6 @@ public class DragonBoss extends Monster{
     //Special Attack
     public void attackEnemy(Creature attackCreature) {
         int typeOfAttack = (int)Math.floor(Math.random() * 100);
-        System.out.println(typeOfAttack);
         if(typeOfAttack < 10) {
             handleSpecialAttack(attackCreature, getDamage()+10);
         } else {

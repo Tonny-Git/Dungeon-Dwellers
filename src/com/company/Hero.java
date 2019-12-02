@@ -40,7 +40,13 @@ public class Hero extends Creature {
     }
 
     public void attackEnemy(Creature attackCreature) {
-        handleNormalAttack(attackCreature);
+        int typeOfAttack = (int)Math.floor(Math.random() * 100);
+        System.out.println(typeOfAttack);
+        if(typeOfAttack < 10) {
+            handleSpecialAttack(attackCreature, getDamage()*2);
+        } else {
+            handleNormalAttack(attackCreature);
+        }
     }
 
     public void handleSpecialAttack(Creature attackCreature, int damage) {

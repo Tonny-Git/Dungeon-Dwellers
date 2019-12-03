@@ -8,9 +8,9 @@ public class Room extends Position {
 
     CupOfCoffee coffe = new CupOfCoffee("Covfefe", 10);
     Toothbrush toothbrush = new Toothbrush("Tooth brush",1);
-    Bandit bandit = new Bandit(60, 4);
-    Spider spider = new Spider(20,5);
-    DragonBoss dragon = new DragonBoss(500,50);
+    Bandit bandit = new Bandit();
+    Spider spider = new Spider();
+    DragonBoss dragon = new DragonBoss();
 
     ArrayList<Creature> roomCreatures = new ArrayList<>();
     ArrayList<Items> roomItems = new ArrayList<>();

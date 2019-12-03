@@ -5,12 +5,15 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Room extends Position {
 
-    Creature bandit = new Bandit(60, 4);
-    Creature spider = new Spider(20,5);
-    Creature dragon = new DragonBoss(500,50);
+
+    CupOfCoffee coffe = new CupOfCoffee("Covfefe", 10);
+    Toothbrush toothbrush = new Toothbrush("Tooth brush",1);
+    Bandit bandit = new Bandit(60, 4);
+    Spider spider = new Spider(20,5);
+    DragonBoss dragon = new DragonBoss(500,50);
 
     ArrayList<Creature> roomCreatures = new ArrayList<>();
-    ArrayList<Creature> roomItems = new ArrayList<>();
+    ArrayList<Items> roomItems = new ArrayList<>();
     String roomType;
 
     public void setHasWall(boolean hasWall) {
@@ -18,12 +21,13 @@ public class Room extends Position {
     }
 
 
-    Item item = new Item();
+
     private boolean hasWall = false;
     private int randomNum = ThreadLocalRandom.current().nextInt(0, 3 + 1);
 
     public Room(int posX, int poxY, String roomType) {
         super(posX, poxY);
+        this.roomType = roomType;
         makeRoom(roomType);
 
 
@@ -41,7 +45,7 @@ public class Room extends Position {
                 break;
             case "item": placeLootRoom(randomNum);
                 break;
-            case "item/monster": placeLootRoom(randomNum);
+            case "item/monster": placeLootRoom(randomNum); populateRoom(randomNum);
                 break;
             case "boss": placeLootRoom(666);
 
@@ -72,9 +76,9 @@ public class Room extends Position {
     private void placeLootRoom(int roomNumber) {
 
         switch (roomNumber) {
-            case 1: roomCreatures.add(bandit);
+            case 1: roomItems.add(coffe);
                 break;
-            case 2: roomCreatures.add(spider);
+            case 2: roomItems.add(toothbrush);
                 break;
             case 3: // item
                 break;
@@ -87,7 +91,7 @@ public class Room extends Position {
         return roomCreatures;
     }
 
-    public ArrayList<Creature> getRoomItems() {
+    public ArrayList<Items> getRoomItems() {
         return roomItems;
     }
 

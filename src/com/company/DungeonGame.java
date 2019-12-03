@@ -8,7 +8,7 @@ public class DungeonGame {
     private Maze maze;
     private Hero hero;
     private boolean exitGame = false;
-
+    private int keydropped = 0;
     public DungeonGame() {
         mainMenu();
 
@@ -102,16 +102,16 @@ public class DungeonGame {
     }
 
     private void enterRoom() {
-        if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()) == null) {
+        if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()) == null) { // finns det monster?
             fight();
 
-        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()) == null) {
+        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()) == null) { // finns det kista?
             treasure();
 
-        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()) == null) {
+        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()) == null) { // är det tomt?
             empty();
 
-        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()) == null) {
+        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()) == null) { // är det bossen?
             boss();
 
         }
@@ -134,10 +134,17 @@ public class DungeonGame {
                             "IF you retrieve it for her she will reward you greatly." + "\n" +
                             "Do you accept? Y/N");
             if (scanner.nextLine().toLowerCase() == "y") {
-                dropToothbrushSomewhereInDungeon();
-            } else {
-                System.out.println("You angered The Elder Dragon and she blasted you with a ball of fire");
-                hero.setHealth(0);
+                if (keydropped < 1) {
+                    dropToothbrushSomewhereInDungeon();
+                    keydropped++;
+                }
+                else if (scanner.nextLine().toLowerCase() == "y" && keydropped >= 1) {
+                    System.out.println("You have already taken upon you to complete the dragons quest");
+                }
+                else {
+                    System.out.println("You angered The Elder Dragon and she blasted you with a ball of fire");
+                    hero.setHealth(0);
+                }
             }
         }
     }
@@ -149,10 +156,10 @@ public class DungeonGame {
             int randomNum = ThreadLocalRandom.current().nextInt(0, maze.getMazeArray().length + 1);
 
             if (!maze.getMazeRoom(randomNum, randomNum).getWall()) {
-                maze.mazeArray[randomNum][randomNum].addItem("toothbrush");
+                maze.getMazeArray()[randomNum][randomNum].addItem("toothbrush");
                 cont = false;
             }
-        }while (!cont);
+        }while (cont);
     }
 
     private void empty() {

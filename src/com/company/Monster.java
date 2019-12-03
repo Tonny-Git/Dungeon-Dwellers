@@ -18,4 +18,9 @@ public abstract class Monster extends Creature {
             //Skriv item drop kåd här.
         }
     }
+
+    public void handleSpecialAttack(Creature attackCreature, int damage) {
+        attackCreature.getDamaged(damage);
+        System.out.printf("%s did a special attack for %d damage.\n", getName(), damage);
+    }
 }

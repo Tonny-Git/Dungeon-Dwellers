@@ -11,11 +11,16 @@ public abstract class Creature {
         this.damage = damage;
     }
 
-    //Skriva attack
-    public void attack() {
-
+    //Skriva ut attack
+    public void handleNormalAttack(Creature attackCreature) {
+        attackCreature.getDamaged(damage);
+        System.out.printf("%s did a normal attack for %d damage.\n", name, damage);
     }
-    //Skriva ta skada
+
+    public abstract void handleSpecialAttack(Creature attackCreature, int damage);
+
+    public abstract void attackEnemy(Creature attackCreature);
+
     public abstract void getDamaged(int damageAmount);
 
     public String getName() {
@@ -24,6 +29,10 @@ public abstract class Creature {
 
     public int getHealth() {
         return health;
+    }
+
+    public int getDamage() {
+        return damage;
     }
 
     public void increaseHealth(int health) {

@@ -3,11 +3,11 @@ package com.company;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
+public class Maze{
 
     private int mapSize = 15;
     private Room[][] mazeArray;
-
-
+    
 
     public Maze() {
 

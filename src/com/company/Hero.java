@@ -39,4 +39,7 @@ public class Hero extends Creature {
         }
     }
 
+    public int getTotalExp() {
+        return totalExp;
+    }
 }

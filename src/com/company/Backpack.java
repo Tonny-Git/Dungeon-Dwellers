@@ -3,7 +3,7 @@ package com.company;
 import java.util.ArrayList;
 
 public class Backpack {
-    ArrayList<Items> itemsInBackpack = new ArrayList<>();
+    private ArrayList<Items> itemsInBackpack = new ArrayList<>();
 
     public void addItem(Items items){
         itemsInBackpack.add(items);
@@ -16,5 +16,9 @@ public class Backpack {
             bagWeight += items.getWeight();
         }
         return bagWeight;
+    }
+
+    public ArrayList<Items> getItemsInBackpack() {
+        return itemsInBackpack;
     }
 }

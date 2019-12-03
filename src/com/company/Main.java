@@ -7,6 +7,8 @@ public class Main {
 
         Maze maze = new Maze();
         System.out.println("yo!");
+        Maze maze = new Maze();
+       System.out.println(maze);
         //DungeonGame game = new DungeonGame();
 
         System.out.println(maze.toString());

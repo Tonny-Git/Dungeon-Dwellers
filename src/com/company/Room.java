@@ -1,67 +1,50 @@
 package com.company;
 
-import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
-import java.util.Random;
+public class Room extends Position {
 
-public class Room {
+    Creature creature = new Bandit(60, 4);
+    Item item = new Item();
+    private boolean hasWall = false;
 
+    public Room(int posX, int poxY, boolean wall) {
+        super(posX, poxY);
+        this.hasWall = wall;
 
- Random rand = new Random();
+        int randomNum = ThreadLocalRandom.current().nextInt(0, 3 + 1);
 
- private int n = rand.nextInt(3);
+        wichTypeOfRoom(randomNum);
 
- private ArrayList<Creature> inhabs = new ArrayList<>();
+    }
 
- private Spider spider = new Spider(10, 1);
-private Bandit bandit = new Bandit(20, 2);
-
- private int xPosition = 0;
- private int yPosition = 0;
-
- public Room(int xPosition, int yPosition){
-
-  this.xPosition = xPosition;
-  this.yPosition = yPosition;
-  roomInhab();
-  
+    public boolean getWall() {
+        return hasWall;
+    }
 
 
+    private void wichTypeOfRoom(int roomNumber) {
 
+        switch (roomNumber) {
+            case 1: // empty
+                break;
+            case 2: // monster
+                break;
+            case 3: // item
+                break;
+            case 4: // boss
 
+        }
+    }
 
+    @Override
+    public String toString() {
+        String retuner = " ";
 
+        if (this.hasWall) {
+            retuner = "W";
+        }
+        return retuner;
+    }
+}
 
-
-
- }
-
-private void roomInhab(){
-     if(n == 2){
-   inhabs.add(spider);
-  }
-  else   {inhabs.add(bandit);}
-
-  }
-
-
-
-
-
- @Override
- public String toString() {
-  String outputString = "[0]";
-
-
-
- if(inhabs.get(0) == spider){
-     outputString = "[S]";
- }
-
- else if(inhabs.get(0) == bandit){
-         outputString = "[B]";
-     }
-
- return outputString;
-
-}}

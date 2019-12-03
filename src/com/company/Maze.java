@@ -21,7 +21,7 @@ public class Maze{
 
         mazeArray = new Room[mapSize][mapSize];
 
-        System.out.println(mazeArray);
+        System.out.println(mazeArray.toString());
 
         for (int col = 0; col < mazeArray.length; col++) {
             for (int row = 0; row < mazeArray.length; row++) {
@@ -33,7 +33,7 @@ public class Maze{
                 mazeArray[1][14] = new Room(col, row, false); // ska vara tomm
             }
         }
-        System.out.println(mazeArray);
+        System.out.println(mazeArray.toString());
     }
 
     public Room getMazeRoom(int xPosition, int yPosition) {
@@ -50,6 +50,7 @@ public class Maze{
 
         int wallCounter = 0;
         boolean returner = false;
+
 
         for (int i = -1; i <= 1; i++) {
             if (mazeArray[col + i][row].getWall()) {

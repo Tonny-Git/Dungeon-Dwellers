@@ -5,9 +5,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Maze {
 
-    private String wall = "W";
-    private String door = "D";
-    private String hero = "H";
     private int mapSize = 15;
     private Room[][] mazeArray;
 
@@ -18,7 +15,7 @@ public class Maze {
         System.out.println("How big map do you want?" + "\n" + "(Standard is 15 by 15)");
         int scannerInput = scanner.nextInt();
 
-        if(scannerInput > 0 &&  scannerInput < 40) {
+        if (scannerInput > 0 && scannerInput < 40) {
             this.mapSize = scannerInput;
         }
 
@@ -27,11 +24,11 @@ public class Maze {
         for (int col = 0; col < mazeArray.length; col++) {
             for (int row = 0; row < mazeArray.length; row++) {
                 if (mazeArray[col][row] == (mazeArray[col][0]) || (mazeArray[col][row] == (mazeArray[0][row]))) {
-                    mazeArray[col][row] = new Room(col,row); // ska vara tomt
+                    mazeArray[col][row] = new Room(col, row, true); // ska vara vägg
                 } else {
-                    mazeArray[col][row] = new Room(col,row);
+                    mazeArray[col][row] = new Room(col, row, makeWall(col, row));
                 }
-                mazeArray[1][14] = new Room(col,row); // ska vara tomt
+                mazeArray[1][14] = new Room(col, row, false); // ska vara tomm
             }
         }
     }
@@ -41,13 +38,39 @@ public class Maze {
         return mazeArray[xPosition][yPosition];
 
     }
-    private void calulateIfWallOrNot() {
-        int randomNum = ThreadLocalRandom.current().nextInt(0, 2 + 1);
-
-        if (  )
-
+    public Room[][] getMazeArray(){
+        return this.mazeArray;
     }
 
+
+    private boolean makeWall(int col, int row) {
+
+        int wallCounter = 0;
+        boolean returner = false;
+
+        for (int i = -1; i <= 1; i++) {
+            if (mazeArray[col + i][row].getWall()) {
+                wallCounter++;
+                if (mazeArray[col][row + i].getWall()) {
+                    wallCounter++;
+                }
+            }
+        }
+        returner = wallCounter > 2;
+        return returner;
+    }
+
+    public boolean canIgoHere(int X, int Y) {
+        boolean out = false;
+
+        if (mazeArray[X][Y].getWall()) {
+            System.out.println("Cant go there.");
+            out = false;
+        } else {
+            out = true;
+        }
+        return out;
+    }
 
 
     @Override

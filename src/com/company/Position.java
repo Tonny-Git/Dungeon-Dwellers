@@ -2,8 +2,8 @@ package com.company;
 
 public abstract class Position {
 
-    private int posX;
-    private int posY;
+    protected int posX;
+    protected int posY;
 
 
     public Position(int posX, int poxY){

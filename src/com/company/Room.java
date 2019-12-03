@@ -4,17 +4,24 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Room extends Position {
 
-    Creature creature = new Creature();
+    Creature creature = new Bandit(60, 4);
     Item item = new Item();
+    private boolean hasWall = false;
 
-    public Room(int posX, int poxY) {
+    public Room(int posX, int poxY, boolean wall) {
         super(posX, poxY);
+        this.hasWall = wall;
 
         int randomNum = ThreadLocalRandom.current().nextInt(0, 3 + 1);
 
         wichTypeOfRoom(randomNum);
 
     }
+
+    public boolean getWall() {
+        return hasWall;
+    }
+
 
     private void wichTypeOfRoom(int roomNumber) {
 
@@ -32,8 +39,12 @@ public class Room extends Position {
 
     @Override
     public String toString() {
+        String retuner = " ";
 
-        return "[]";
+        if (this.hasWall) {
+            retuner = "W";
+        }
+        return retuner;
     }
 }
 

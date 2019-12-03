@@ -4,7 +4,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Room extends Position {
 
-    Creature creature = new Bandit(60, 4);
+    Creature creature = new Bandit();
     Item item = new Item();
     private boolean hasWall = false;
 

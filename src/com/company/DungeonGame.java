@@ -4,9 +4,9 @@ import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 /*
 public class DungeonGame {
+/*
 
     private Maze maze;
-    private Hero hero;
 
     public DungeonGame() {
         mainMenu();
@@ -153,5 +153,7 @@ public class DungeonGame {
             hero.setHealth(-2);
         }
     }
+
+ */
 }
 */

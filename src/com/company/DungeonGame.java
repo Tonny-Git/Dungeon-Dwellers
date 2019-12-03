@@ -3,10 +3,10 @@ package com.company;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-/*/public class DungeonGame {
+public class DungeonGame {
+/*
 
     private Maze maze;
-    private Hero hero;
 
     public DungeonGame() {
         mainMenu();
@@ -153,5 +153,7 @@ import java.util.concurrent.ThreadLocalRandom;
             hero.setHealth(-2);
         }
     }
+
+ */
 }
 /* * */

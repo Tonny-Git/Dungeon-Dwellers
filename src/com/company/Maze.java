@@ -26,11 +26,11 @@ public class Maze {
         for (int col = 0; col < mazeArray.length; col++) {
             for (int row = 0; row < mazeArray.length; row++) {
                 if (mazeArray[col][row] == (mazeArray[col][0]) || (mazeArray[col][row] == (mazeArray[0][row]))) {
-                    mazeArray[col][row] = new Room(EMPTY);
+                    mazeArray[col][row] = new Room();
                 } else {
                     mazeArray[col][row] = new Room();
                 }
-                mazeArray[1][14] = new Room(EMPTY);
+                mazeArray[1][14] = new Room();
             }
         }
     }

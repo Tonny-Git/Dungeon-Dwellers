@@ -2,14 +2,13 @@ package com.company;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Room extends Position {
+public class Room  {
 
     Creature creature = new Bandit(60, 4);
     Item item = new Item();
     private boolean hasWall = false;
 
-    public Room(int posX, int poxY, boolean wall) {
-        super(posX, poxY);
+    public Room(boolean wall) {
         this.hasWall = wall;
 
         int randomNum = ThreadLocalRandom.current().nextInt(0, 3 + 1);
@@ -18,8 +17,12 @@ public class Room extends Position {
 
     }
 
+    public void setHasWall(boolean hasWall) {
+        this.hasWall = hasWall;
+    }
+
     public boolean getWall() {
-        return hasWall;
+        return this.hasWall;
     }
 
 

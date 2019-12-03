@@ -2,7 +2,7 @@ package com.company;
 
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
-
+/*
 public class DungeonGame {
 
     private Maze maze;
@@ -178,6 +178,7 @@ public class DungeonGame {
         switch (whatToDO) {
             case 1:
                 System.out.println("A fight broke out!");
+                hero.fightEnemy();
                 break;
             case 2:
                 System.out.println("You tried to flee. " + "It didn't work.");
@@ -194,14 +195,21 @@ public class DungeonGame {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("You found a treasure!");
-        int randomNum = ThreadLocalRandom.current().nextInt(0, itemArray.length + 1);
+
+
+        int randomNum = ThreadLocalRandom.current().nextInt(0, 50);
+        System.out.println("You found " + randomNum + " gold " + "\n" +
+                "Do you want to pick up gold? Y / N?");
+
+        /*int randomNum = ThreadLocalRandom.current().nextInt(0, itemArray.length + 1);
         System.out.println("You found " + itemArray[randomNum] + "\n" +
                 "Do you want to pick up item? Y / N? ");
-
-        String input = scanner.nextLine();
+*/
+      /*  String input = scanner.nextLine();
         if (input.toLowerCase() == "y") {
-            hero.addItem(itemArray[randomNum]);
-            System.out.println("Picked up item");
+            hero.addGold(randomNum);
+           // hero.addItem(itemArray[randomNum]);
+            System.out.println("Picked up gold");
         } else if (input.toLowerCase() == "n") {
             System.out.println("Left item");
         } else {
@@ -227,3 +235,4 @@ public class DungeonGame {
         return outputString;
     }
 }
+*/

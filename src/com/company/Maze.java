@@ -19,18 +19,25 @@ public class Maze {
             this.mapSize = scannerInput;
         }
 
-        mazeArray = new Room[mapSize][mapSize];
+        Room[][] mazeArray = new Room[mapSize][mapSize];
+
+        for (int col = 0; col < mazeArray.length; col++) {
+            for (int row = 0; row < mazeArray.length; row++) {
+                mazeArray[col][row] = new Room(false); // skapa alla rum
+            }
+        }
 
         for (int col = 0; col < mazeArray.length; col++) {
             for (int row = 0; row < mazeArray.length; row++) {
                 if (mazeArray[col][row] == (mazeArray[col][0]) || (mazeArray[col][row] == (mazeArray[0][row]))) {
-                    mazeArray[col][row] = new Room(col, row, true); // ska vara vägg
+                    mazeArray[col][row] = new Room(true); // skapar ramen
                 } else {
-                    mazeArray[col][row] = new Room(col, row, makeWall(col, row));
+                    mazeArray[col][row] = new Room(makeWall(col, row)); // sätt dit väggar
                 }
-                mazeArray[1][14] = new Room(col, row, false); // ska vara tomm
             }
         }
+        mazeArray[(mazeArray.length + 1) - mazeArray.length]
+                [mazeArray.length - 1] = new Room(true); // ska vara tomm
     }
 
     public Room getMazeRoom(int xPosition, int yPosition) {
@@ -38,7 +45,8 @@ public class Maze {
         return mazeArray[xPosition][yPosition];
 
     }
-    public Room[][] getMazeArray(){
+
+    public Room[][] getMazeArray() {
         return this.mazeArray;
     }
 
@@ -56,7 +64,11 @@ public class Maze {
                 }
             }
         }
-        returner = wallCounter > 2;
+        if (wallCounter > 2) {
+            returner = true;
+        } else {
+            returner = false;
+        }
         return returner;
     }
 

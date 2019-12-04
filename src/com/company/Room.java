@@ -9,20 +9,25 @@ public class Room extends Position {
     CupOfCoffee coffe = new CupOfCoffee("Covfefe", 20);
     Toothbrush toothbrush = new Toothbrush("Tooth brush", 3);
     Gold gold = new Gold("Gold Coin", 1);
+    GoldChest goldChest = new GoldChest("Gold Chest", 100);
     Bandit bandit = new Bandit();
     Spider spider = new Spider();
     DragonBoss dragon = new DragonBoss();
 
-    ArrayList<Creature> roomCreatures = new ArrayList<>();
-    ArrayList<Items> roomItems = new ArrayList<>();
-    int roomType;
-
-    public void setHasWall(boolean hasWall) {
-        this.hasWall = hasWall;
-    }
-
-
     private boolean hasWall = false;
+
+    private ArrayList<Creature> roomCreatures = new ArrayList<>();
+
+
+
+    private ArrayList<Items> roomItems = new ArrayList<>();
+    private int roomType;
+    private boolean isBossRoom = false;
+
+
+
+
+
 
 
     public Room(int posX, int poxY, int roomType) {
@@ -32,6 +37,20 @@ public class Room extends Position {
         makeRoom(this.roomType);
 
 
+    }
+
+    public void setHasWall(boolean hasWall) {
+        this.hasWall = hasWall;
+    }
+
+    public void setBossRoom(boolean bossRoom) {
+        isBossRoom = bossRoom;
+        if (isBossRoom){
+            roomCreatures.clear();
+            roomCreatures.add(dragon);
+            roomItems.clear();
+            roomItems.add(goldChest);
+        }
     }
 
     public void makeRoom(int roomType) {
@@ -44,7 +63,7 @@ public class Room extends Position {
                 break;
             case 2:
                 placeLootRoom();
-;
+
                 break;
             case 3:
                 populateRoom();
@@ -78,7 +97,7 @@ public class Room extends Position {
         }
     }
 
-    private void placeLootRoom() {
+    public void placeLootRoom() {
         int randomNum = ThreadLocalRandom.current().nextInt(0, 2 + 1);
 
         switch (randomNum) {
@@ -99,7 +118,7 @@ public class Room extends Position {
     }
 
 
-    private void placeGoldRoom() {
+    public void placeGoldRoom() {
         int randomNum = ThreadLocalRandom.current().nextInt(0, 1 + 1);
 
         while (randomNum == 0) {

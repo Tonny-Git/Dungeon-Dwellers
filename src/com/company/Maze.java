@@ -130,10 +130,15 @@ public class Maze{
     public String toString() {
         String outputString = "";
 
+
         for (int i = 0; i < mazeArray.length; i++) {
+
             for (int j = 0; j < mazeArray[i].length; j++) {
                 outputString += " " + mazeArray[i][j];
+
             }
+            outputString += "\n";
+
         }
         return outputString;
     }

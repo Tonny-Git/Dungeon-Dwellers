@@ -144,7 +144,7 @@ public class Room extends Position {
 
     @Override
     public String toString() {
-        String retuner = String.valueOf(roomType);
+        String retuner = " ";
 
         if (this.hasWall) {
             retuner = "W";

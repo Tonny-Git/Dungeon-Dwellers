@@ -14,7 +14,7 @@ public class Room extends Position {
 
     ArrayList<Creature> roomCreatures = new ArrayList<>();
     ArrayList<Items> roomItems = new ArrayList<>();
-    String roomType;
+    int roomType;
 
     public void setHasWall(boolean hasWall) {
         this.hasWall = hasWall;
@@ -25,7 +25,7 @@ public class Room extends Position {
     private boolean hasWall = false;
     private int randomNum = ThreadLocalRandom.current().nextInt(0, 3 + 1);
 
-    public Room(int posX, int poxY, String roomType) {
+    public Room(int posX, int poxY, int roomType) {
         super(posX, poxY);
         this.roomType = roomType;
         makeRoom(roomType);
@@ -35,19 +35,19 @@ public class Room extends Position {
 
     }
 
-    public void makeRoom(String roomType){
+    public void makeRoom(int roomType){
         switch (roomType) {
-            case "wall": hasWall=true;
+            case 0: hasWall=true;
                 break;
-            case "empty": ;
+            case 1: ;
                 break;
-            case "monster": populateRoom(randomNum);
+            case 2: populateRoom(randomNum);
                 break;
-            case "item": placeLootRoom(randomNum);
+            case 3: placeLootRoom(randomNum);
                 break;
-            case "item/monster": placeLootRoom(randomNum); populateRoom(randomNum);
+            case 4: placeLootRoom(randomNum); populateRoom(randomNum);
                 break;
-            case "boss": placeLootRoom(666);
+
 
         }
     }

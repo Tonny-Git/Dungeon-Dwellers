@@ -21,10 +21,14 @@ public class Room extends Position {
 
     private ArrayList<Items> roomItems = new ArrayList<>();
     private boolean isBossRoom = false;
+    private int roomType;
+    private boolean isEmpty = false;
 
 
     public Room(int posX, int poxY, int roomType) {
+
         super(posX, poxY);
+        this.roomType = roomType;
 
         makeRoom(roomType);
 
@@ -55,6 +59,7 @@ public class Room extends Position {
                 hasWall = true;
                 break;
             case 1:
+                isEmpty = true;
 
                 break;
             case 2:
@@ -139,7 +144,7 @@ public class Room extends Position {
 
     @Override
     public String toString() {
-        String retuner = " ";
+        String retuner = String.valueOf(roomType);
 
         if (this.hasWall) {
             retuner = "W";

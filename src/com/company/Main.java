@@ -8,18 +8,7 @@ public class Main {
 	// write your code here
         Maze maze = new Maze();
         maze.randomPosition();
-        Room room = new Room(1,2, 0);
-        Room room2 = new Room(1,2, 1);
-        Room room3 = new Room(1,2, 2);
-        Room room4 = new Room(1,2, 3);
-        Room room5 = new Room(1,2, 4);
-
-
-        System.out.println(room.getRoomInfo());
-        System.out.println(room2.getRoomInfo());
-        System.out.println(room3.getRoomInfo());
-        System.out.println(room4.getRoomInfo());
-        System.out.println(room5.getRoomInfo());
+        System.out.println(maze.toString());
 
 
         /*

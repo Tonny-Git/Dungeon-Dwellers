@@ -2,6 +2,7 @@ package com.company;
 
 public abstract class Monster extends Creature {
     private int experiencePoints;
+    private boolean isdead = false;
 
     public Monster(String name, int health, int damage) {
         super(name, health, damage);
@@ -15,12 +16,21 @@ public abstract class Monster extends Creature {
     public void getDamaged(int damageAmount) {
         setHealth(getHealth()-damageAmount);
         if (getHealth() <= 0) {
-            //Skriv item drop kåd här.
+            System.out.println("You killed " + getName());
+            isdead = true;
         }
     }
 
     public void handleSpecialAttack(Creature attackCreature, int damage) {
         attackCreature.getDamaged(damage);
         System.out.printf("%s did a special attack for %d damage.\n", getName(), damage);
+    }
+
+    public int getExperiencePoints() {
+        return experiencePoints;
+    }
+
+    public boolean isIsdead() {
+        return isdead;
     }
 }

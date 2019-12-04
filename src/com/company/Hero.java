@@ -8,6 +8,7 @@ public class Hero extends Creature {
     private int totalExp = 0;
     private int positionX = 2;
     private int positionY = 14;
+    private Backpack backpack = new Backpack();
 
     public Hero(String name) {
         super(name, 100, 10);
@@ -66,5 +67,9 @@ public class Hero extends Creature {
 
     public int getPositionY() {
         return positionY;
+    }
+
+    public Backpack getBackpack() {
+        return backpack;
     }
 }

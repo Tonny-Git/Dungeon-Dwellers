@@ -27,16 +27,28 @@ public class Maze{
        // System.out.println(Arrays.deepToString(mazeArray));
 
         for (int col = 0; col < mazeArray.length; col++) {
+
             for (int row = 0; row < mazeArray.length; row++) {
-                if (mazeArray[col][row] == (mazeArray[col][0]) || (mazeArray[col][row] == (mazeArray[0][row]))) {
-                    mazeArray[col][row] = new Room(col, row, 0); // ska vara vägg
-                } else {
+                if ((mazeArray[col][row] == (mazeArray[col][0])) || ((mazeArray[col][row] == (mazeArray[0][row])))){
+                    mazeArray[col][row] = new Room(col, row, 0);
+
+                }
+
+
+
+                else {
                     int randomNum = ThreadLocalRandom.current().nextInt(0, 5);
                     mazeArray[col][row] = new Room(col, row, randomNum);
                 }
-                mazeArray[1][14] = new Room(col, row, 1); // ska vara tomm
+                mazeArray[1][scannerInput-2] = new Room(col, row, 1); // ska vara tomm
+                mazeArray[mapSize-1][row] = new Room(mapSize-1, col, 0);
+
             }
+            mazeArray[col][mapSize-1] = new Room(col, mapSize-1, 0);
+
         }
+
+
         //System.out.println(Arrays.deepToString(mazeArray));
         mazePositions = new int[mapSize*mapSize];
     }

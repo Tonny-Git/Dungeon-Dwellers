@@ -6,35 +6,27 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Room extends Position {
 
 
-    CupOfCoffee coffe = new CupOfCoffee("Covfefe", 20);
-    Toothbrush toothbrush = new Toothbrush("Tooth brush", 3);
-    Gold gold = new Gold("Gold Coin", 1);
-    GoldChest goldChest = new GoldChest("Gold Chest", 100);
-    Bandit bandit = new Bandit();
-    Spider spider = new Spider();
-    DragonBoss dragon = new DragonBoss();
+    private CupOfCoffee coffe = new CupOfCoffee("Covfefe", 20);
+    private Toothbrush toothbrush = new Toothbrush("Tooth brush", 3);
+    private Gold gold = new Gold("Gold Coin", 1);
+    private GoldChest goldChest = new GoldChest("Gold Chest", 100);
+    private Bandit bandit = new Bandit();
+    private Spider spider = new Spider();
+    private DragonBoss dragon = new DragonBoss();
 
     private boolean hasWall = false;
 
     private ArrayList<Creature> roomCreatures = new ArrayList<>();
 
 
-
     private ArrayList<Items> roomItems = new ArrayList<>();
-    private int roomType;
     private boolean isBossRoom = false;
-
-
-
-
-
 
 
     public Room(int posX, int poxY, int roomType) {
         super(posX, poxY);
-        this.roomType = roomType;
 
-        makeRoom(this.roomType);
+        makeRoom(roomType);
 
 
     }
@@ -43,9 +35,13 @@ public class Room extends Position {
         this.hasWall = hasWall;
     }
 
+    public boolean isBossRoom() {
+        return isBossRoom;
+    }
+
     public void setBossRoom(boolean bossRoom) {
         isBossRoom = bossRoom;
-        if (isBossRoom){
+        if (isBossRoom) {
             roomCreatures.clear();
             roomCreatures.add(dragon);
             roomItems.clear();

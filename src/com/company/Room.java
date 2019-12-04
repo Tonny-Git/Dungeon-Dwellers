@@ -7,7 +7,7 @@ public class Room extends Position {
 
 
     CupOfCoffee coffe = new CupOfCoffee("Covfefe", 10);
-    Toothbrush toothbrush = new Toothbrush("Tooth brush",1);
+    Toothbrush toothbrush = new Toothbrush("Tooth brush", 1);
     Bandit bandit = new Bandit();
     Spider spider = new Spider();
     DragonBoss dragon = new DragonBoss();
@@ -21,7 +21,6 @@ public class Room extends Position {
     }
 
 
-
     private boolean hasWall = false;
     private int randomNum = ThreadLocalRandom.current().nextInt(0, 3 + 1);
 
@@ -31,27 +30,30 @@ public class Room extends Position {
         makeRoom(roomType);
 
 
-
-
     }
 
-    public void makeRoom(int roomType){
+    public void makeRoom(int roomType) {
         switch (roomType) {
-            case 0: hasWall=true;
+            case 0:
+                hasWall = true;
                 break;
-            case 1: ;
+            case 1:
+                ;
                 break;
-            case 2: populateRoom(randomNum);
+            case 2:
+                populateRoom(randomNum);
                 break;
-            case 3: placeLootRoom(randomNum);
+            case 3:
+                placeLootRoom(randomNum);
                 break;
-            case 4: placeLootRoom(randomNum); populateRoom(randomNum);
+            case 4:
+                placeLootRoom(randomNum);
+                populateRoom(randomNum);
                 break;
 
 
         }
     }
-
 
 
     public boolean getWall() {
@@ -62,9 +64,11 @@ public class Room extends Position {
     public void populateRoom(int roomNumber) {
 
         switch (roomNumber) {
-            case 1: roomCreatures.add(bandit);
+            case 1:
+                roomCreatures.add(bandit);
                 break;
-            case 2: roomCreatures.add(spider);
+            case 2:
+                roomCreatures.add(spider);
                 break;
             case 3: // item
                 break;
@@ -76,9 +80,11 @@ public class Room extends Position {
     private void placeLootRoom(int roomNumber) {
 
         switch (roomNumber) {
-            case 1: roomItems.add(coffe);
+            case 1:
+                roomItems.add(coffe);
                 break;
-            case 2: roomItems.add(toothbrush);
+            case 2:
+                roomItems.add(toothbrush);
                 break;
             case 3: // item
                 break;

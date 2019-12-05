@@ -25,21 +25,21 @@ public class Maze{
 
         for (int col = 0; col < mazeArray.length; col++) {
             for (int row = 0; row < mazeArray.length; row++) {
-                mazeArray[col][row] = new Room(false); // skapa alla rum
+                mazeArray[col][row] = new Room("wall"); // skapa alla rum
             }
         }
 
         for (int col = 0; col < mazeArray.length; col++) {
             for (int row = 0; row < mazeArray.length; row++) {
                 if (mazeArray[col][row] == (mazeArray[col][0]) || (mazeArray[col][row] == (mazeArray[0][row]))) {
-                    mazeArray[col][row] = new Room(true); // skapar ramen
+                    mazeArray[col][row] = new Room("wall"); // skapar ramen
                 } else {
                     mazeArray[col][row] = new Room(makeWall(col, row)); // sätt dit väggar
                 }
             }
         }
         mazeArray[(mazeArray.length + 1) - mazeArray.length]
-                [mazeArray.length - 1] = new Room(true); // ska vara tomm
+                [mazeArray.length - 1] = new Room("wall"); // ska vara tomm
     }
 
     public Room getMazeRoom(int xPosition, int yPosition) {

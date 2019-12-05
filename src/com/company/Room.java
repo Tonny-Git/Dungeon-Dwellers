@@ -8,9 +8,9 @@ public class Room  {
 
     CupOfCoffee coffe = new CupOfCoffee("Covfefe", 10);
     Toothbrush toothbrush = new Toothbrush("Tooth brush",1);
-    Bandit bandit = new Bandit(60, 4);
-    Spider spider = new Spider(20,5);
-    DragonBoss dragon = new DragonBoss(500,50);
+    Bandit bandit = new Bandit();
+    Spider spider = new Spider();
+    DragonBoss dragon = new DragonBoss();
 
     ArrayList<Creature> roomCreatures = new ArrayList<>();
     ArrayList<Items> roomItems = new ArrayList<>();
@@ -25,8 +25,7 @@ public class Room  {
     private boolean hasWall = false;
     private int randomNum = ThreadLocalRandom.current().nextInt(0, 3 + 1);
 
-    public Room(int posX, int poxY, String roomType) {
-        super(posX, poxY);
+    public Room(String roomType) {
         this.roomType = roomType;
         makeRoom(roomType);
 

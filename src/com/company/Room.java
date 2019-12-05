@@ -26,13 +26,8 @@ public class Room {
 
 
     public Room(int roomType) {
-
-
         this.roomType = roomType;
-
         makeRoom(roomType);
-
-
     }
 
     public void setHasWall(boolean hasWall) {
@@ -161,7 +156,7 @@ public class Room {
 
     @Override
     public String toString() {
-        String retuner = " ";
+        String retuner = "X";
 
         if (this.hasWall) {
             retuner = "W";

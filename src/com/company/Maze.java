@@ -118,32 +118,20 @@ public class Maze {
         }
         return randomPositions;
     }
-    private void createMap() {
 
-        for (int inter : mazePositions) {
-
-            int counter = 0;
-            int i = 0;
-            int j;
-
-            for (j = 0; j < mapSize; j++) {
-                    if (j == mapSize - 1) {
-                        j = 0;
-                        counter++;
-                        i = counter;
-                        if (counter == mapSize - 1){
-                            break;
-                        }
-                    }
-                }
-                mazeArray[i][j] = new Room(inter);
+    public void createMap() {
+        int numPos = 0;
+        for (int i = 0; i < mazeArray.length; i++) {
+            for (int j = 0; j < mazeArray[i].length; j++) {
+                mazeArray[i][j] = new Room(mazePositions[numPos]);
+                numPos++;
+            }
         }
     }
 
     @Override
     public String toString() {
         String outputString = "";
-
 
         for (int i = 0; i < mazeArray.length; i++) {
 

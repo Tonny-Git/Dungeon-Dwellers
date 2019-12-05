@@ -12,7 +12,7 @@ public class Maze {
     private int[] mazePositions;
 
 
-    public Maze() {
+    public Maze(int i) {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("How big map do you want?" + "\n" + "(Standard is 15 by 15)");

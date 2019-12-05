@@ -3,7 +3,7 @@ package com.company;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Room extends Position {
+public class Room {
 
 
     private CupOfCoffee coffe = new CupOfCoffee("Covfefe", 20);
@@ -25,9 +25,9 @@ public class Room extends Position {
     private boolean isEmpty = false;
 
 
-    public Room(int posX, int poxY, int roomType) {
+    public Room(int roomType) {
 
-        super(posX, poxY);
+
         this.roomType = roomType;
 
         makeRoom(roomType);
@@ -43,15 +43,11 @@ public class Room extends Position {
         return isBossRoom;
     }
 
-    public void setBossRoom(boolean bossRoom) {
-        isBossRoom = bossRoom;
-        if (isBossRoom) {
-            roomCreatures.clear();
+    public void setBossRoom() {
             roomCreatures.add(dragon);
-            roomItems.clear();
             roomItems.add(goldChest);
+            isBossRoom = true;
         }
-    }
 
     public void makeRoom(int roomType) {
         switch (roomType) {
@@ -74,6 +70,11 @@ public class Room extends Position {
                 populateRoom();
                 break;
 
+            case 5:
+                placeToothbrushRoom();
+                break;
+            case 6:
+                setBossRoom();
 
         }
     }
@@ -99,23 +100,25 @@ public class Room extends Position {
     }
 
     public void placeLootRoom() {
-        int randomNum = ThreadLocalRandom.current().nextInt(0, 2 + 1);
+        int randomNum = ThreadLocalRandom.current().nextInt(0, 2);
 
         switch (randomNum) {
             case 0:
                 roomItems.add(coffe);
                 placeGoldRoom();
                 break;
-            case 1:
-                roomItems.add(toothbrush);
-                placeGoldRoom();
-                break;
 
-            case 2:
+
+
+            case 1:
                 roomItems.add(gold);
                 placeGoldRoom();
 
         }
+    }
+
+    public void placeToothbrushRoom(){
+        roomItems.add(toothbrush);
     }
 
 

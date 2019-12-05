@@ -5,7 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Room extends Position {
 
-
+    private Monster monster;
     private CupOfCoffee coffe = new CupOfCoffee("Covfefe", 20);
     private Toothbrush toothbrush = new Toothbrush("Tooth brush", 3);
     private Gold gold = new Gold("Gold Coin", 1);

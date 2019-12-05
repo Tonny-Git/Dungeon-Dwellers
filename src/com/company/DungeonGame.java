@@ -2,7 +2,7 @@ package com.company;
 
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
-/*
+
 public class DungeonGame {
 
     private Maze maze;
@@ -142,6 +142,8 @@ public class DungeonGame {
         }
     }
 
+    //Ta bort senare
+    /*
     private void dropToothbrushSomewhereInDungeon() {
 
         boolean cont = true;
@@ -154,6 +156,7 @@ public class DungeonGame {
             }
         }while (!cont);
     }
+    */
 
     private void empty() {
         System.out.println("This room is empty..");
@@ -162,25 +165,27 @@ public class DungeonGame {
     private void fight() {
         System.out.println(hero + "encountered" + maze.getMazeRoom(hero.getPositionX(), hero.getPositionY())); // + MONSTER
 
-        System.out.println("1. Fight \n" +
-                "2. Flee \n" +
-                "3. Heal up");
-        Scanner scanner = new Scanner(System.in);
-        int whatToDO = scanner.nextInt();
+        while(true) {
+            System.out.println("1. Fight \n" +
+                    "2. Flee \n" +
+                    "3. Heal up");
+            Scanner scanner = new Scanner(System.in);
+            int whatToDO = scanner.nextInt();
 
-        switch (whatToDO) {
-            case 1:
-                System.out.println("A fight broke out!");
-                break;
-            case 2:
-                System.out.println("You tried to flee. " + "It didn't work.");
-                break;
-            case 3:
-                /// metod for use item
-                System.out.println("You healed"); // + hp regen
-                break;
+            switch (whatToDO) {
+                case 1:
+                    System.out.println("A fight broke out!");
+                    hero.attackEnemy();
+                    break;
+                case 2:
+                    System.out.println("You tried to flee. " + "It didn't work.");
+                    break;
+                case 3:
+                    /// metod for use item
+                    System.out.println("You healed"); // + hp regen
+                    break;
+            }
         }
-
     }
 
     private void treasure() {
@@ -220,4 +225,3 @@ public class DungeonGame {
         return outputString;
     }
 }
-/* * */

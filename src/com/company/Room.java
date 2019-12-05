@@ -17,7 +17,7 @@ public class Room {
 
     private boolean hasWall = false;
 
-    private ArrayList<Creature> roomCreatures = new ArrayList<>();
+   // private ArrayList<Creature> roomCreatures = new ArrayList<>();
 
 
     private ArrayList<Items> roomItems = new ArrayList<>();
@@ -45,7 +45,7 @@ public class Room {
     }
 
     public void setBossRoom() {
-            roomCreatures.add(dragon);
+            monster = new DragonBoss();
             roomItems.add(goldChest);
             isBossRoom = true;
         }
@@ -92,11 +92,11 @@ public class Room {
         switch (randomNum) {
             case 0:
                 monster = new Bandit();
-                roomCreatures.add(monster);
+
                 break;
             case 1:
                 monster = new Spider();
-                roomCreatures.add(monster);
+
 
 
         }
@@ -140,16 +140,18 @@ public class Room {
     }
 
 
-    public ArrayList<Creature> getRoomCreatures() {
-        return roomCreatures;
-    }
+
 
     public ArrayList<Items> getRoomItems() {
         return roomItems;
     }
 
+    public Monster getMonster() {
+        return monster;
+    }
+
     public String getRoomInfo() {
-        return getWall() + " " + getRoomCreatures() + " " + getRoomItems();
+        return getWall() + " "  + getRoomItems();
     }
 
     @Override

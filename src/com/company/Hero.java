@@ -69,6 +69,20 @@ public class Hero extends Creature {
         return positionY;
     }
 
+    public int getTotalExp() {
+        return totalExp;
+    }
+
+    public boolean hasToothbrush () {
+        boolean toothbrush = false;
+
+        if (backpack.findItemInBackpack("toothbrush") == null)
+        {
+            toothbrush = true;
+        }
+        return toothbrush;
+    }
+
     public Backpack getBackpack() {
         return backpack;
     }

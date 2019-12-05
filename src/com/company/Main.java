@@ -3,7 +3,6 @@ package com.company;
 import java.util.ArrayList;
 
 public class Main {
-
     public static void main(String[] args) {
 	// write your code here
         Maze maze = new Maze();
@@ -26,4 +25,3 @@ public class Main {
 
         // 0 wall, 1 empty room, 2 monster, 3 item, 4 item/monster, 5 boss
     }
-}

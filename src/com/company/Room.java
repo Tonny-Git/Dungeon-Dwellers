@@ -83,7 +83,7 @@ public class Room {
 
 
     public boolean getWall() {
-        return hasWall;
+        return this.hasWall;
     }
 
 

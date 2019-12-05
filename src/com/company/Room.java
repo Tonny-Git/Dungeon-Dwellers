@@ -1,7 +1,6 @@
 package com.company;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Room {
@@ -11,11 +10,10 @@ public class Room {
     private Monster monster;
 
 
-
-
-
-
-
+    public int getRoomGold() {
+        int goldAmount = roomGold.size();
+        return goldAmount;
+    }
 
     private boolean hasWall = false;
 
@@ -149,7 +147,7 @@ public class Room {
         return item;
     }
 
-    public boolean isEmpty() {
+    public boolean getIsEmpty() {
         return isEmpty;
     }
 

@@ -59,10 +59,13 @@ public class DungeonGame {
 
         System.out.println("--- You entered the Dungeon ---");
 
+        updateHeroPosition(2,2);
         movement();
     }
 
     private void movement() {
+
+        System.out.println(maze);
 
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -103,7 +106,7 @@ public class DungeonGame {
                     break;
             }
         }
-    }
+   // }
 
     public void showMap() {
         System.out.println(maze);
@@ -233,6 +236,11 @@ public class DungeonGame {
         }
     }
 
+    private void updateHeroPosition(int x, int y){
+        hero.setPosition(x,y);
+        maze.updateHeroPosition(x,y);
+    }
+/*
     @Override
     public String toString() {
         String outputString = "";
@@ -248,5 +256,5 @@ public class DungeonGame {
             }
         }
         return outputString;
-    }
+    } */
 }

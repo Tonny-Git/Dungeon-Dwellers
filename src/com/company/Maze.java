@@ -10,6 +10,8 @@ public class Maze {
     private int mapSize = 10;
     private Room[][] mazeArray;
     private int[] mazePositions;
+    private int heroPositionX = 0;
+    private int getHeroPositionY = 0;
 
 
     public Maze() {
@@ -25,6 +27,7 @@ public class Maze {
         mazePositions = new int[mapSize * mapSize];
         randomPosition();
         mazeArray = new Room[mapSize][mapSize];
+        System.out.println(mazePositions);
         createMap();
 
     }
@@ -129,18 +132,27 @@ public class Maze {
         }
     }
 
+        public void updateHeroPosition(int x, int y) {
+
+        int heroPositionX = x;
+        int getHeroPositionY = y;
+    }
+
     @Override
     public String toString() {
-        String outputString = "";
+        createMap();
+        String outputString = "[]";
 
         for (int i = 0; i < mazeArray.length; i++) {
+            for (int j = 0; j < mazeArray.length; j++) {
 
-            for (int j = 0; j < mazeArray[i].length; j++) {
-                outputString += " " + mazeArray[i][j];
-
+                if (heroPositionX == i && getHeroPositionY == j) {
+                    outputString += " " + " H ";
+                } else {
+                    outputString += " " + mazeArray[i][j].toString();
+                }
             }
             outputString += "\n";
-
         }
         return outputString;
     }

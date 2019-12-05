@@ -149,9 +149,7 @@ public class Room {
         return item;
     }
 
-    public Monster getMonster() {
-        return monster;
-    }
+
 
     public Monster getMonster() {
         return monster;

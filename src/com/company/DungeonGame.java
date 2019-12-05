@@ -103,13 +103,13 @@ public class DungeonGame {
     }
 
     private void enterRoom() {
-        if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getMonster != null) { // finns det monster?
+        if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getMonster() != null) { // finns det monster?
             fight();
 
-        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getRoomItems()) { // finns det kista?
+        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getRoomItems() != null) { // finns det kista?
             treasure();
 
-        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).isEmpty) { // är det tomt?
+        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getIsEmpty()) { // är det tomt?
             empty();
 
         } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).isBossRoom()) { // är det bossen?
@@ -155,7 +155,7 @@ public class DungeonGame {
             int randomNum = ThreadLocalRandom.current().nextInt(0, maze.getMazeArray().length + 1);
 
             if (!maze.getMazeRoom(randomNum, randomNum).getWall()) {
-                maze.getMazeArray()[randomNum][randomNum].addItem("toothbrush");
+                maze.getMazeArray()[randomNum][randomNum].placeToothbrushRoom();
                 cont = false;
             }
         } while (cont);
@@ -166,7 +166,7 @@ public class DungeonGame {
     }
 
     private void fight() {
-        System.out.println(hero + "encountered" + maze.getMazeRoom(hero.getPositionX(), hero.getPositionY())).getMonster(); // + MONSTER
+        System.out.println(hero + "encountered" + maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getMonster()); // + MONSTER
 
         System.out.println("1. Fight \n" +
                 "2. Flee \n" +

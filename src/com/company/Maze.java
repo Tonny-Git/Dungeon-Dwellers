@@ -22,19 +22,23 @@ public class Maze{
             this.mapSize = scannerInput;
         }
 
+        mazePositions = new int[mapSize*mapSize];
         randomPosition();
-        Room[][] mazeArray = new Room[mapSize][mapSize];
+        mazeArray = new Room[mapSize][mapSize];
 
         for (int inter : mazePositions) {
             int counter = 0;
-            int i = 0;
-            int j;
+            int i = 0;//x
+            int j;//y
 
-                for(j = 0; j<=mapSize; j++){
-                    if(j == mapSize){
+                for(j = 0; j < mapSize; j++){
+                    if(j == mapSize-1){
                         j = 0;
                         counter++;
                         i = counter;
+                        if(counter == mapSize-1) {
+                            break;
+                        }
                     }
                 }
             mazeArray[i][j] = new Room(inter);

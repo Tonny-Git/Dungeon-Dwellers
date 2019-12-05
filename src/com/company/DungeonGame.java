@@ -136,7 +136,7 @@ public class DungeonGame {
                             "Do you accept? Y/N");
             if (scanner.nextLine().toLowerCase() == "y") {
                 if (keydropped < 1) {
-                    dropToothbrushSomewhereInDungeon();
+                    //dropToothbrushSomewhereInDungeon();
                     keydropped++;
                 } else if (scanner.nextLine().toLowerCase() == "y" && keydropped >= 1) {
                     System.out.println("You have already taken upon you to complete the dragons quest");
@@ -181,7 +181,7 @@ public class DungeonGame {
             switch (whatToDO) {
                 case 1:
                     System.out.println("A fight broke out!");
-                    hero.attackEnemy();
+                    //hero.attackEnemy();
                     break;
                 case 2:
                     System.out.println("You tried to flee. " + "It didn't work.");
@@ -214,10 +214,10 @@ public class DungeonGame {
         String input = scanner.nextLine();
         if (input.toLowerCase() == "y") {
 
-            int gold = maze.getMazeRoom(hero.getPositionX(), hero.getPositionY().getGold());
-            hero.addGold(gold);
+            //int gold = maze.getMazeRoom(hero.getPositionX(), hero.getPositionY().getGold());
+            //hero.addGold(gold);
 
-            System.out.println("Picked up gold " + gold);
+            //System.out.println("Picked up gold " + gold);
         } else if (input.toLowerCase() == "n") {
             System.out.println("Left item");
         } else {

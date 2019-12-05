@@ -21,4 +21,20 @@ public class Backpack {
     public ArrayList<Items> getItemsInBackpack() {
         return itemsInBackpack;
     }
+
+    public void showContent(){
+        System.out.println(itemsInBackpack);
+    }
+
+    public Items findItemInBackpack(String itemToSearchFor){
+        for (Items items : itemsInBackpack){
+            if (items == null){
+                continue;
+            }
+            if (itemToSearchFor.equals(items.getName())){
+                return items;
+            }
+        }
+        return null;
+    }
 }

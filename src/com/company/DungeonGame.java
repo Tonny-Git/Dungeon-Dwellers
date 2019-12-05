@@ -53,20 +53,23 @@ public class DungeonGame {
 
         this.hero = new Hero("pelle");
         System.out.println( "Hero " + hero.getName() + " created");
-        this.maze = new Maze(14);
+        this.maze = new Maze();
 
         System.out.println("--- Loading map ---");
 
         System.out.println("--- You entered the Dungeon ---");
 
+        updateHeroPosition(2,2);
         movement();
     }
 
     private void movement() {
 
-        Scanner scanner = new Scanner(System.in);
-        while (this.exitGame = false) {
+        System.out.println(maze);
 
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            showMap();
             System.out.println("--- Where do you want to go " + hero.getName() + "? ---");
             System.out.println(
                     "1. Up" + "\n" +
@@ -79,30 +82,34 @@ public class DungeonGame {
             switch (whereoTo) {
                 case 1:
                     if (maze.canIgoHere(hero.getPositionX(), hero.getPositionY() - 1)) {
-                        hero.setPosition(hero.getPositionX(), hero.getPositionY() - 1);
+                        updateHeroPosition(hero.getPositionX(), hero.getPositionY() - 1);
                         enterRoom();
                     }
                     break;
                 case 2:
                     if (maze.canIgoHere(hero.getPositionX(), hero.getPositionY() + 1)) {
-                        hero.setPosition(hero.getPositionX(), hero.getPositionY() + 1);
+                        updateHeroPosition(hero.getPositionX(), hero.getPositionY() + 1);
                         enterRoom();
                     }
                     break;
                 case 3:
                     if (maze.canIgoHere(hero.getPositionX() - 1, hero.getPositionY())) {
-                        hero.setPosition(hero.getPositionX() - 1, hero.getPositionY());
+                        updateHeroPosition(hero.getPositionX() - 1, hero.getPositionY());
                         enterRoom();
                     }
                     break;
                 case 4:
                     if (maze.canIgoHere(hero.getPositionX() + 1, hero.getPositionY())) {
-                        hero.setPosition(hero.getPositionX() + 1, hero.getPositionY());
+                        updateHeroPosition(hero.getPositionX() + 1, hero.getPositionY());
                         enterRoom();
                     }
                     break;
             }
         }
+    }
+
+    public void showMap(){
+        System.out.println(maze);
     }
 
     private void enterRoom() {
@@ -229,6 +236,12 @@ public class DungeonGame {
         }
     }
 
+    private void updateHeroPosition(int x, int y){
+        hero.setPosition(x,y);
+        maze.updateHeroPosition(hero.getPositionX(), hero.getPositionY());
+
+    }
+/*
     @Override
     public String toString() {
         String outputString = "";
@@ -244,5 +257,5 @@ public class DungeonGame {
             }
         }
         return outputString;
-    }
+    } */
 }

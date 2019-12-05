@@ -68,9 +68,8 @@ public class DungeonGame {
         System.out.println(maze);
 
         Scanner scanner = new Scanner(System.in);
-
-      //while (exitGame = false) {
-
+        while (true) {
+            showMap();
             System.out.println("--- Where do you want to go " + hero.getName() + "? ---");
             System.out.println(
                     "1. Up" + "\n" +
@@ -108,6 +107,10 @@ public class DungeonGame {
             }
         }
    // }
+
+    public void showMap() {
+        System.out.println(maze);
+    }
 
     private void enterRoom() {
         if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getMonster() != null) { // finns det monster?

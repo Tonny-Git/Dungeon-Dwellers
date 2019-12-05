@@ -25,13 +25,8 @@ public class Room {
 
 
     public Room(int roomType) {
-
-
         this.roomType = roomType;
-
         makeRoom(roomType);
-
-
     }
 
     public void setHasWall(boolean hasWall) {

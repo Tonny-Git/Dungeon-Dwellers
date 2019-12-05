@@ -5,13 +5,14 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Room {
 
+    private Items item;
+    private Monster monster;
 
-    private CupOfCoffee coffe = new CupOfCoffee("Covfefe", 20);
     private Toothbrush toothbrush = new Toothbrush("Tooth brush", 3);
-    private Gold gold = new Gold("Gold Coin", 1);
+
     private GoldChest goldChest = new GoldChest("Gold Chest", 100);
-    private Bandit bandit = new Bandit();
-    private Spider spider = new Spider();
+
+
     private DragonBoss dragon = new DragonBoss();
 
     private boolean hasWall = false;
@@ -90,10 +91,12 @@ public class Room {
 
         switch (randomNum) {
             case 0:
-                roomCreatures.add(bandit);
+                monster = new Bandit();
+                roomCreatures.add(monster);
                 break;
             case 1:
-                roomCreatures.add(spider);
+                monster = new Spider();
+                roomCreatures.add(monster);
 
 
         }
@@ -104,20 +107,23 @@ public class Room {
 
         switch (randomNum) {
             case 0:
-                roomItems.add(coffe);
+                item = new CupOfCoffee("Covfefe", 20);
+                roomItems.add(item);
                 placeGoldRoom();
                 break;
 
 
 
             case 1:
-                roomItems.add(gold);
+                item = new Gold("Gold Coin", 1);
+                roomItems.add(item);
                 placeGoldRoom();
 
         }
     }
 
     public void placeToothbrushRoom(){
+
         roomItems.add(toothbrush);
     }
 
@@ -126,7 +132,8 @@ public class Room {
         int randomNum = ThreadLocalRandom.current().nextInt(0, 1 + 1);
 
         while (randomNum == 0) {
-            roomItems.add(gold);
+            item = new Gold("Gold Coin", 1);
+            roomItems.add(item);
             randomNum = ThreadLocalRandom.current().nextInt(0, 1 + 1);
 
         }

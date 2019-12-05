@@ -6,7 +6,9 @@ public class Hero extends Creature {
     //private Backpack backpack = new Backpack(); //Implementera när backpack finns
     private int lvl = 1;
     private int totalExp = 0;
-
+    private int positionX = 2;
+    private int positionY = 14;
+    private Backpack backpack = new Backpack();
 
     public Hero(String name) {
         super(name, 100, 10);
@@ -39,7 +41,35 @@ public class Hero extends Creature {
         }
     }
 
-    public int getTotalExp() {
-        return totalExp;
+    public void attackEnemy(Creature attackCreature) {
+        int typeOfAttack = (int)Math.floor(Math.random() * 100);
+        System.out.println(typeOfAttack);
+        if(typeOfAttack < 10) {
+            handleSpecialAttack(attackCreature, getDamage()*2);
+        } else {
+            handleNormalAttack(attackCreature);
+        }
+    }
+
+    public void handleSpecialAttack(Creature attackCreature, int damage) {
+        attackCreature.getDamaged(damage);
+        System.out.printf("%s did a critical attack for %d damage.", getName(), damage);
+    }
+
+    public void setPosition(int positionX, int positionY) {
+        this.positionX = positionX;
+        this.positionY = positionY;
+    }
+
+    public int getPositionX() {
+        return positionX;
+    }
+
+    public int getPositionY() {
+        return positionY;
+    }
+
+    public Backpack getBackpack() {
+        return backpack;
     }
 }

@@ -149,7 +149,9 @@ public class Room {
         return item;
     }
 
-
+    public boolean isEmpty() {
+        return isEmpty;
+    }
 
     public Monster getMonster() {
         return monster;

@@ -18,7 +18,6 @@ public class Room {
     private boolean hasWall = false;
 
 
-
     private ArrayList<Items> roomGold = new ArrayList<>();
     private boolean isBossRoom = false;
     private int roomType;
@@ -46,8 +45,8 @@ public class Room {
     public void setBossRoom() {
         monster = new DragonBoss();
         item = new GoldChest("Gold Chest", 100);
-            isBossRoom = true;
-        }
+        isBossRoom = true;
+    }
 
     public void makeRoom(int roomType) {
         switch (roomType) {
@@ -56,7 +55,6 @@ public class Room {
                 break;
             case 1:
                 isEmpty = true;
-
                 break;
             case 2:
                 placeLootRoom();
@@ -81,7 +79,7 @@ public class Room {
 
 
     public boolean getWall() {
-        return this.hasWall;
+        return hasWall;
     }
 
 
@@ -95,7 +93,6 @@ public class Room {
                 break;
             case 1:
                 monster = new Spider();
-
 
 
         }
@@ -112,7 +109,6 @@ public class Room {
                 break;
 
 
-
             case 1:
                 Gold goldCoin = new Gold("Gold Coin", 1);
                 roomGold.add(goldCoin);
@@ -121,7 +117,7 @@ public class Room {
         }
     }
 
-    public void placeToothbrushRoom(){
+    public void placeToothbrushRoom() {
         item = new Toothbrush("Tooth brush", 3);
 
 
@@ -140,9 +136,6 @@ public class Room {
     }
 
 
-
-
-
     public Items getRoomItems() {
         return item;
     }
@@ -156,14 +149,14 @@ public class Room {
     }
 
     public String getRoomInfo() {
-        return getWall() + " "  + getRoomItems();
+        return getWall() + " " + getRoomItems();
     }
 
     @Override
     public String toString() {
-        String retuner = " ";
+        String retuner = "[ ]";
 
-        if (this.hasWall) {
+        if (hasWall) {
             retuner = "W";
         }
         return retuner;

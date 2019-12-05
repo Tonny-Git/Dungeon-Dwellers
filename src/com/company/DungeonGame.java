@@ -53,19 +53,23 @@ public class DungeonGame {
 
         this.hero = new Hero("pelle");
         System.out.println( "Hero " + hero.getName() + " created");
-        this.maze = new Maze(14);
+        this.maze = new Maze();
 
         System.out.println("--- Loading map ---");
 
         System.out.println("--- You entered the Dungeon ---");
 
+        updateHeroPosition(2,2);
         movement();
     }
 
     private void movement() {
 
+        System.out.println(maze);
+
         Scanner scanner = new Scanner(System.in);
-        while (this.exitGame = false) {
+
+      //while (exitGame = false) {
 
             System.out.println("--- Where do you want to go " + hero.getName() + "? ---");
             System.out.println(
@@ -103,7 +107,7 @@ public class DungeonGame {
                     break;
             }
         }
-    }
+   // }
 
     private void enterRoom() {
         if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getMonster() != null) { // finns det monster?
@@ -112,7 +116,7 @@ public class DungeonGame {
         } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getRoomItems() != null) { // finns det kista?
             treasure();
 
-        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).isEmpty()) { // är det tomt?
+        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getIsEmpty()) { // är det tomt?
             empty();
 
         } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).isBossRoom()) { // är det bossen?
@@ -225,6 +229,11 @@ public class DungeonGame {
         }
     }
 
+    private void updateHeroPosition(int x, int y){
+        hero.setPosition(x,y);
+        maze.updateHeroPosition(x,y);
+    }
+/*
     @Override
     public String toString() {
         String outputString = "";
@@ -240,5 +249,5 @@ public class DungeonGame {
             }
         }
         return outputString;
-    }
+    } */
 }

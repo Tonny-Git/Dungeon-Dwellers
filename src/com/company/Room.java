@@ -25,9 +25,8 @@ public class Room  {
     private boolean isEmpty = false;
 
 
-    public Room(int posX, int poxY, int roomType) {
+    public Room(int roomType) {
 
-        super(posX, poxY);
         this.roomType = roomType;
 
         makeRoom(roomType);

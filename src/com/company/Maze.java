@@ -22,33 +22,25 @@ public class Maze{
             this.mapSize = scannerInput;
         }
 
+        randomPosition();
         Room[][] mazeArray = new Room[mapSize][mapSize];
 
-       // System.out.println(Arrays.deepToString(mazeArray));
+        for (int inter : mazePositions) {
+            int counter = 0;
+            int i = 0;
+            int j;
 
-        for (int col = 0; col < mazeArray.length; col++) {
-
-            for (int row = 0; row < mazeArray.length; row++) {
-                mazeArray[col][row] = new Room("wall"); // skapa alla rum
-            }
-        }
-
-        for (int col = 0; col < mazeArray.length; col++) {
-            for (int row = 0; row < mazeArray.length; row++) {
-                if (mazeArray[col][row] == (mazeArray[col][0]) || (mazeArray[col][row] == (mazeArray[0][row]))) {
-                    mazeArray[col][row] = new Room("wall"); // skapar ramen
-                } else {
-                    mazeArray[col][row] = new Room(makeWall(col, row)); // sätt dit väggar
+                for(j = 0; j<=mapSize; j++){
+                    if(j == mapSize){
+                        j = 0;
+                        counter++;
+                        i = counter;
+                    }
                 }
-            }
-            mazeArray[col][mapSize-1] = new Room(col, mapSize-1, 0);
+            mazeArray[i][j] = new Room(inter);
 
         }
-        mazeArray[(mazeArray.length + 1) - mazeArray.length]
-                [mazeArray.length - 1] = new Room("wall"); // ska vara tomm
     }
-
-
 
     public Room getMazeRoom(int xPosition, int yPosition) {
 

@@ -82,33 +82,33 @@ public class DungeonGame {
             switch (whereoTo) {
                 case 1:
                     if (maze.canIgoHere(hero.getPositionX(), hero.getPositionY() - 1)) {
-                        hero.setPosition(hero.getPositionX(), hero.getPositionY() - 1);
+                        updateHeroPosition(hero.getPositionX(), hero.getPositionY() - 1);
                         enterRoom();
                     }
                     break;
                 case 2:
                     if (maze.canIgoHere(hero.getPositionX(), hero.getPositionY() + 1)) {
-                        hero.setPosition(hero.getPositionX(), hero.getPositionY() + 1);
+                        updateHeroPosition(hero.getPositionX(), hero.getPositionY() + 1);
                         enterRoom();
                     }
                     break;
                 case 3:
                     if (maze.canIgoHere(hero.getPositionX() - 1, hero.getPositionY())) {
-                        hero.setPosition(hero.getPositionX() - 1, hero.getPositionY());
+                        updateHeroPosition(hero.getPositionX() - 1, hero.getPositionY());
                         enterRoom();
                     }
                     break;
                 case 4:
                     if (maze.canIgoHere(hero.getPositionX() + 1, hero.getPositionY())) {
-                        hero.setPosition(hero.getPositionX() + 1, hero.getPositionY());
+                        updateHeroPosition(hero.getPositionX() + 1, hero.getPositionY());
                         enterRoom();
                     }
                     break;
             }
         }
-   // }
+    }
 
-    public void showMap() {
+    public void showMap(){
         System.out.println(maze);
     }
 
@@ -238,7 +238,8 @@ public class DungeonGame {
 
     private void updateHeroPosition(int x, int y){
         hero.setPosition(x,y);
-        maze.updateHeroPosition(x,y);
+        maze.updateHeroPosition(hero.getPositionX(), hero.getPositionY());
+
     }
 /*
     @Override

@@ -22,45 +22,33 @@ public class Maze{
             this.mapSize = scannerInput;
         }
 
-        mazeArray = new Room[mapSize][mapSize];
+        randomPosition();
+        Room[][] mazeArray = new Room[mapSize][mapSize];
 
-       // System.out.println(Arrays.deepToString(mazeArray));
+        for (int inter : mazePositions) {
+            int counter = 0;
+            int i = 0;
+            int j;
 
-        for (int col = 0; col < mazeArray.length; col++) {
-
-            for (int row = 0; row < mazeArray.length; row++) {
-                if ((mazeArray[col][row] == (mazeArray[col][0])) || ((mazeArray[col][row] == (mazeArray[0][row])))){
-                    mazeArray[col][row] = new Room(col, row, 0);
-
+                for(j = 0; j<=mapSize; j++){
+                    if(j == mapSize){
+                        j = 0;
+                        counter++;
+                        i = counter;
+                    }
                 }
-
-
-
-                else {
-                    int randomNum = ThreadLocalRandom.current().nextInt(0, 5);
-                    mazeArray[col][row] = new Room(col, row, randomNum);
-                }
-                mazeArray[1][scannerInput-2] = new Room(col, row, 1); // ska vara tomm
-                mazeArray[mapSize-1][row] = new Room(mapSize-1, col, 0);
-
-            }
-            mazeArray[col][mapSize-1] = new Room(col, mapSize-1, 0);
+            mazeArray[i][j] = new Room(inter);
 
         }
-
-
-        //System.out.println(Arrays.deepToString(mazeArray));
-        mazePositions = new int[mapSize*mapSize];
     }
-
-
 
     public Room getMazeRoom(int xPosition, int yPosition) {
 
         return mazeArray[xPosition][yPosition];
 
     }
-    public Room[][] getMazeArray(){
+
+    public Room[][] getMazeArray() {
         return this.mazeArray;
     }
 
@@ -79,7 +67,11 @@ public class Maze{
                 }
             }
         }
-        returner = wallCounter > 2;
+        if (wallCounter > 2) {
+            returner = true;
+        } else {
+            returner = false;
+        }
         return returner;
     }
 

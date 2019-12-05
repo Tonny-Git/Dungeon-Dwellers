@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-	// write your code here
-        Maze maze = new Maze();
-        maze.randomPosition();
-        System.out.println(maze.toString());
+        // write your code here
+        DungeonGame game = new DungeonGame();
+        //Maze maze = new Maze();
+        //System.out.println(maze.toString());
 
 
         /*
@@ -25,3 +25,4 @@ public class Main {
 
         // 0 wall, 1 empty room, 2 monster, 3 item, 4 item/monster, 5 boss
     }
+}

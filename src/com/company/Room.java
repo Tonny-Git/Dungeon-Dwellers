@@ -1,26 +1,27 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Room {
 
     private Items item;
+
     private Monster monster;
 
-    private Toothbrush toothbrush = new Toothbrush("Tooth brush", 3);
-
-    private GoldChest goldChest = new GoldChest("Gold Chest", 100);
 
 
-    private DragonBoss dragon = new DragonBoss();
+
+
+
+
 
     private boolean hasWall = false;
 
-   // private ArrayList<Creature> roomCreatures = new ArrayList<>();
 
 
-    private ArrayList<Items> roomItems = new ArrayList<>();
+    private ArrayList<Items> roomGold = new ArrayList<>();
     private boolean isBossRoom = false;
     private int roomType;
     private boolean isEmpty = false;
@@ -45,8 +46,8 @@ public class Room {
     }
 
     public void setBossRoom() {
-            monster = new DragonBoss();
-            roomItems.add(goldChest);
+        monster = new DragonBoss();
+        item = new GoldChest("Gold Chest", 100);
             isBossRoom = true;
         }
 
@@ -108,23 +109,24 @@ public class Room {
         switch (randomNum) {
             case 0:
                 item = new CupOfCoffee("Covfefe", 20);
-                roomItems.add(item);
+
                 placeGoldRoom();
                 break;
 
 
 
             case 1:
-                item = new Gold("Gold Coin", 1);
-                roomItems.add(item);
+                Gold goldCoin = new Gold("Gold Coin", 1);
+                roomGold.add(goldCoin);
                 placeGoldRoom();
 
         }
     }
 
     public void placeToothbrushRoom(){
+        item = new Toothbrush("Tooth brush", 3);
 
-        roomItems.add(toothbrush);
+
     }
 
 
@@ -132,8 +134,8 @@ public class Room {
         int randomNum = ThreadLocalRandom.current().nextInt(0, 1 + 1);
 
         while (randomNum == 0) {
-            item = new Gold("Gold Coin", 1);
-            roomItems.add(item);
+            Gold goldCoin = new Gold("Gold Coin", 1);
+            roomGold.add(goldCoin);
             randomNum = ThreadLocalRandom.current().nextInt(0, 1 + 1);
 
         }
@@ -142,8 +144,13 @@ public class Room {
 
 
 
-    public ArrayList<Items> getRoomItems() {
-        return roomItems;
+
+    public Items getRoomItems() {
+        return item;
+    }
+
+    public Monster getMonster() {
+        return monster;
     }
 
     public Monster getMonster() {

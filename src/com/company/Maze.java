@@ -5,41 +5,28 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Maze{
+public class Maze {
 
     private int mapSize = 10;
     private Room[][] mazeArray;
     private int[] mazePositions;
 
 
-    public Maze() {
+    public Maze(int scannerInput) {
 
-        Scanner scanner = new Scanner(System.in);
+       // Scanner scanner = new Scanner(System.in);
         System.out.println("How big map do you want?" + "\n" + "(Standard is 15 by 15)");
-        int scannerInput = scanner.nextInt();
+        // int scannerInput = scanner.nextInt();
 
         if (scannerInput > 0 && scannerInput < 40) {
             this.mapSize = scannerInput;
         }
 
+        mazePositions = new int[mapSize * mapSize];
         randomPosition();
-        Room[][] mazeArray = new Room[mapSize][mapSize];
+        mazeArray = new Room[mapSize][mapSize];
+        createMap();
 
-        for (int inter : mazePositions) {
-            int counter = 0;
-            int i = 0;
-            int j;
-
-                for(j = 0; j<=mapSize; j++){
-                    if(j == mapSize){
-                        j = 0;
-                        counter++;
-                        i = counter;
-                    }
-                }
-            mazeArray[i][j] = new Room(inter);
-
-        }
     }
 
     public Room getMazeRoom(int xPosition, int yPosition) {
@@ -87,21 +74,21 @@ public class Maze{
         return out;
     }
 
-    public void randomPosition () {
-        int numOfMonster = (int)Math.floor((Math.random()*5)+3);
-        int numOfItems = (int)Math.floor((Math.random()*3)+2);
-        int numOfMonsterAndItems = (int)Math.floor((Math.random()*4));
+    public void randomPosition() {
+        int numOfMonster = (int) Math.floor((Math.random() * 5) + 3);
+        int numOfItems = (int) Math.floor((Math.random() * 3) + 2);
+        int numOfMonsterAndItems = (int) Math.floor((Math.random() * 4));
         ArrayList<Integer> randomPositions = randomMonsterAndItemPosition(numOfMonster, numOfItems, numOfMonsterAndItems);
 
-        for(int i = 0; i < mapSize*mapSize; i++) {
-            if(i % mapSize == 0 || i % mapSize == mapSize-1 || i < mapSize || i > mapSize*mapSize - mapSize) {
+        for (int i = 0; i < mapSize * mapSize; i++) {
+            if (i % mapSize == 0 || i % mapSize == mapSize - 1 || i < mapSize || i > mapSize * mapSize - mapSize) {
                 mazePositions[i] = 0;
-            } else if(randomPositions.contains(i)) {
-                if(randomPositions.indexOf(i) < numOfMonster) {
+            } else if (randomPositions.contains(i)) {
+                if (randomPositions.indexOf(i) < numOfMonster) {
                     mazePositions[i] = 2;
-                } else if(randomPositions.indexOf(i) < numOfMonster+numOfItems && randomPositions.indexOf(i) >= numOfMonster) {
+                } else if (randomPositions.indexOf(i) < numOfMonster + numOfItems && randomPositions.indexOf(i) >= numOfMonster) {
                     mazePositions[i] = 3;
-                } else if (randomPositions.indexOf(i) < numOfMonster+numOfItems+numOfMonsterAndItems && randomPositions.indexOf(i) >= numOfMonster+numOfItems) {
+                } else if (randomPositions.indexOf(i) < numOfMonster + numOfItems + numOfMonsterAndItems && randomPositions.indexOf(i) >= numOfMonster + numOfItems) {
                     mazePositions[i] = 4;
                 } else {
                     mazePositions[i] = 5;
@@ -112,15 +99,15 @@ public class Maze{
         }
     }
 
-    private ArrayList<Integer> randomMonsterAndItemPosition (int numOfMonster, int numOfItems, int numOfMonsterAndItems) {
+    private ArrayList<Integer> randomMonsterAndItemPosition(int numOfMonster, int numOfItems, int numOfMonsterAndItems) {
         ArrayList<Integer> randomPositions = new ArrayList<>();
         int numTotalt = numOfMonster + numOfItems + numOfMonsterAndItems + 1; //1 For the dragon boss
-        for(int i = 0; i < numTotalt; i++) {
-            int randomNum = (int)Math.floor(Math.random()*(mapSize*mapSize));
-            if(randomNum % mapSize == 0 || randomNum % mapSize == mapSize-1 || randomNum < mapSize || randomNum > mapSize*mapSize - mapSize) {
+        for (int i = 0; i < numTotalt; i++) {
+            int randomNum = (int) Math.floor(Math.random() * (mapSize * mapSize));
+            if (randomNum % mapSize == 0 || randomNum % mapSize == mapSize - 1 || randomNum < mapSize || randomNum > mapSize * mapSize - mapSize) {
                 i--;
             } else {
-                if(!randomPositions.contains(randomNum)) {
+                if (!randomPositions.contains(randomNum)) {
                     randomPositions.add(randomNum);
                 } else {
                     i--;
@@ -128,6 +115,23 @@ public class Maze{
             }
         }
         return randomPositions;
+    }
+    private void createMap() {
+        for (int inter : mazePositions) {
+            int counter = 0;
+            int i = 0;
+            int j;
+
+            for (j = 0; j <= mapSize; j++) {
+                if (j == mapSize) {
+                    j = 0;
+                    counter++;
+                    i = counter;
+                }
+            }
+            mazeArray[i][j] = new Room(inter);
+
+        }
     }
 
     @Override

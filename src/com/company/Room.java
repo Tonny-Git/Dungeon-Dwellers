@@ -1,31 +1,34 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Room  {
+public class Room {
+
+    private Items item;
+
+    private Monster monster;
 
 
-    private CupOfCoffee coffe = new CupOfCoffee("Covfefe", 20);
-    private Toothbrush toothbrush = new Toothbrush("Tooth brush", 3);
-    private Gold gold = new Gold("Gold Coin", 1);
-    private GoldChest goldChest = new GoldChest("Gold Chest", 100);
-    private Bandit bandit = new Bandit();
-    private Spider spider = new Spider();
-    private DragonBoss dragon = new DragonBoss();
+
+
+
+
+
 
     private boolean hasWall = false;
 
-    private ArrayList<Creature> roomCreatures = new ArrayList<>();
 
 
-    private ArrayList<Items> roomItems = new ArrayList<>();
+    private ArrayList<Items> roomGold = new ArrayList<>();
     private boolean isBossRoom = false;
     private int roomType;
     private boolean isEmpty = false;
 
 
     public Room(int roomType) {
+
 
         this.roomType = roomType;
 
@@ -42,15 +45,11 @@ public class Room  {
         return isBossRoom;
     }
 
-    public void setBossRoom(boolean bossRoom) {
-        isBossRoom = bossRoom;
-        if (isBossRoom) {
-            roomCreatures.clear();
-            roomCreatures.add(dragon);
-            roomItems.clear();
-            roomItems.add(goldChest);
+    public void setBossRoom() {
+        monster = new DragonBoss();
+        item = new GoldChest("Gold Chest", 100);
+            isBossRoom = true;
         }
-    }
 
     public void makeRoom(int roomType) {
         switch (roomType) {
@@ -73,6 +72,11 @@ public class Room  {
                 populateRoom();
                 break;
 
+            case 5:
+                placeToothbrushRoom();
+                break;
+            case 6:
+                setBossRoom();
 
         }
     }
@@ -88,33 +92,41 @@ public class Room  {
 
         switch (randomNum) {
             case 0:
-                roomCreatures.add(bandit);
+                monster = new Bandit();
+
                 break;
             case 1:
-                roomCreatures.add(spider);
+                monster = new Spider();
+
 
 
         }
     }
 
     public void placeLootRoom() {
-        int randomNum = ThreadLocalRandom.current().nextInt(0, 2 + 1);
+        int randomNum = ThreadLocalRandom.current().nextInt(0, 2);
 
         switch (randomNum) {
             case 0:
-                roomItems.add(coffe);
-                placeGoldRoom();
-                break;
-            case 1:
-                roomItems.add(toothbrush);
+                item = new CupOfCoffee("Covfefe", 20);
+
                 placeGoldRoom();
                 break;
 
-            case 2:
-                roomItems.add(gold);
+
+
+            case 1:
+                Gold goldCoin = new Gold("Gold Coin", 1);
+                roomGold.add(goldCoin);
                 placeGoldRoom();
 
         }
+    }
+
+    public void placeToothbrushRoom(){
+        item = new Toothbrush("Tooth brush", 3);
+
+
     }
 
 
@@ -122,23 +134,29 @@ public class Room  {
         int randomNum = ThreadLocalRandom.current().nextInt(0, 1 + 1);
 
         while (randomNum == 0) {
-            roomItems.add(gold);
+            Gold goldCoin = new Gold("Gold Coin", 1);
+            roomGold.add(goldCoin);
             randomNum = ThreadLocalRandom.current().nextInt(0, 1 + 1);
 
         }
     }
 
 
-    public ArrayList<Creature> getRoomCreatures() {
-        return roomCreatures;
+
+
+
+    public Items getRoomItems() {
+        return item;
     }
 
-    public ArrayList<Items> getRoomItems() {
-        return roomItems;
+
+
+    public Monster getMonster() {
+        return monster;
     }
 
     public String getRoomInfo() {
-        return getWall() + " " + getRoomCreatures() + " " + getRoomItems();
+        return getWall() + " "  + getRoomItems();
     }
 
     @Override

@@ -12,11 +12,11 @@ public class Maze {
     private int[] mazePositions;
 
 
-    public Maze(int scannerInput) {
+    public Maze() {
 
-       // Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.println("How big map do you want?" + "\n" + "(Standard is 15 by 15)");
-        // int scannerInput = scanner.nextInt();
+        int scannerInput = scanner.nextInt();
 
         if (scannerInput > 0 && scannerInput < 40) {
             this.mapSize = scannerInput;
@@ -117,20 +117,24 @@ public class Maze {
         return randomPositions;
     }
     private void createMap() {
+
         for (int inter : mazePositions) {
+
             int counter = 0;
             int i = 0;
             int j;
 
-            for (j = 0; j <= mapSize; j++) {
-                if (j == mapSize) {
-                    j = 0;
-                    counter++;
-                    i = counter;
+            for (j = 0; j < mapSize; j++) {
+                    if (j == mapSize - 1) {
+                        j = 0;
+                        counter++;
+                        i = counter;
+                        if (counter == mapSize - 1){
+                            break;
+                        }
+                    }
                 }
-            }
-            mazeArray[i][j] = new Room(inter);
-
+                mazeArray[i][j] = new Room(inter);
         }
     }
 

@@ -63,6 +63,7 @@ public class DungeonGame {
     }
 
     private void movement() {
+
         Scanner scanner = new Scanner(System.in);
         while (this.exitGame = false) {
 

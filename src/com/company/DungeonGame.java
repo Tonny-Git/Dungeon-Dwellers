@@ -50,10 +50,12 @@ public class DungeonGame {
     }
 
     private void startGame() {
-        System.out.println("--- Loading map ---");
 
-        this.maze = new Maze();
-        this.hero = new Hero("Pelle");
+        this.hero = new Hero("pelle");
+        System.out.println( "Hero " + hero.getName() + " created");
+        this.maze = new Maze(14);
+
+        System.out.println("--- Loading map ---");
 
         System.out.println("--- You entered the Dungeon ---");
 
@@ -109,7 +111,7 @@ public class DungeonGame {
         } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getRoomItems() != null) { // finns det kista?
             treasure();
 
-        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getIsEmpty()) { // är det tomt?
+        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).isEmpty()) { // är det tomt?
             empty();
 
         } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).isBossRoom()) { // är det bossen?
@@ -177,7 +179,7 @@ public class DungeonGame {
         switch (whatToDO) {
             case 1:
                 System.out.println("A fight broke out!");
-                hero.attackEnemy();
+               // hero.attackEnemy();
                 break;
             case 2:
                 System.out.println("You tried to flee. " + "It didn't work.");
@@ -210,10 +212,10 @@ public class DungeonGame {
         String input = scanner.nextLine();
         if (input.toLowerCase() == "y") {
 
-            int gold = maze.getMazeRoom(hero.getPositionX(), hero.getPositionY().getGold());
+            /*int gold = maze.getMazeRoom(hero.getPositionX(), hero.getPositionY().());
             hero.addGold(gold);
-
-            System.out.println("Picked up gold " + gold);
+*/
+            System.out.println("Picked up gold " + "gold");
         } else if (input.toLowerCase() == "n") {
             System.out.println("Left item");
         } else {

@@ -8,6 +8,9 @@ public class Main {
 	// write your code here
         Maze maze = new Maze();
         maze.randomPosition();
+        System.out.println(maze.toString());
+
+
         /*
         for(int i = 0; i < maze.mazePositions.length; i++) {
             System.out.print(maze.mazePositions[i]);

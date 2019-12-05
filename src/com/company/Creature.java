@@ -46,4 +46,8 @@ public abstract class Creature {
     public void setHealth(int health) {
         this.health = health;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

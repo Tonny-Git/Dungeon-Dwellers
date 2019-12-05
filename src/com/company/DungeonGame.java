@@ -4,7 +4,6 @@ import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 /*
 public class DungeonGame {
-/*
 
     private Maze maze;
     private Hero hero;
@@ -221,4 +220,4 @@ public class DungeonGame {
         return outputString;
     }
 }
-/* * */}
+/* * */

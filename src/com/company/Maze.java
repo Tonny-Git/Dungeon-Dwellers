@@ -93,8 +93,10 @@ public class Maze {
                     mazePositions[i] = 3;
                 } else if (randomPositions.indexOf(i) < numOfMonster + numOfItems + numOfMonsterAndItems && randomPositions.indexOf(i) >= numOfMonster + numOfItems) {
                     mazePositions[i] = 4;
-                } else {
+                } else if (randomPositions.indexOf(i) == randomPositions.size()-2){
                     mazePositions[i] = 5;
+                } else {
+                    mazePositions[i] = 6;
                 }
             } else {
                 mazePositions[i] = 1;
@@ -104,10 +106,10 @@ public class Maze {
 
     private ArrayList<Integer> randomMonsterAndItemPosition(int numOfMonster, int numOfItems, int numOfMonsterAndItems) {
         ArrayList<Integer> randomPositions = new ArrayList<>();
-        int numTotalt = numOfMonster + numOfItems + numOfMonsterAndItems + 1; //1 For the dragon boss
-        for (int i = 0; i < numTotalt; i++) {
-            int randomNum = (int) Math.floor(Math.random() * (mapSize * mapSize));
-            if (randomNum % mapSize == 0 || randomNum % mapSize == mapSize - 1 || randomNum < mapSize || randomNum > mapSize * mapSize - mapSize) {
+        int numTotalt = numOfMonster + numOfItems + numOfMonsterAndItems + 2; //1 For the dragon boss and toothbrush
+        for(int i = 0; i < numTotalt; i++) {
+            int randomNum = (int)Math.floor(Math.random()*(mapSize*mapSize));
+            if(randomNum % mapSize == 0 || randomNum % mapSize == mapSize-1 || randomNum < mapSize || randomNum > mapSize*mapSize - mapSize) {
                 i--;
             } else {
                 if (!randomPositions.contains(randomNum)) {

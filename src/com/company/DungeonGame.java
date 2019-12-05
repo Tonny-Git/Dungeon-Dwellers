@@ -143,7 +143,7 @@ public class DungeonGame {
                             "Do you accept? Y/N");
             if (scanner.nextLine().toLowerCase() == "y") {
                 if (keydropped < 1) {
-                    dropToothbrushSomewhereInDungeon();
+                    //dropToothbrushSomewhereInDungeon();
                     keydropped++;
                 } else if (scanner.nextLine().toLowerCase() == "y" && keydropped >= 1) {
                     System.out.println("You have already taken upon you to complete the dragons quest");
@@ -155,6 +155,8 @@ public class DungeonGame {
         }
     }
 
+    //Ta bort senare
+    /*
     private void dropToothbrushSomewhereInDungeon() {
 
         boolean cont = true;
@@ -167,6 +169,7 @@ public class DungeonGame {
             }
         } while (cont);
     }
+    */
 
     private void empty() {
         System.out.println("This room is empty..");
@@ -175,26 +178,27 @@ public class DungeonGame {
     private void fight() {
         System.out.println(hero + "encountered" + maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getMonster()); // + MONSTER
 
-        System.out.println("1. Fight \n" +
-                "2. Flee \n" +
-                "3. Heal up");
-        Scanner scanner = new Scanner(System.in);
-        int whatToDO = scanner.nextInt();
+        while(true) {
+            System.out.println("1. Fight \n" +
+                    "2. Flee \n" +
+                    "3. Heal up");
+            Scanner scanner = new Scanner(System.in);
+            int whatToDO = scanner.nextInt();
 
-        switch (whatToDO) {
-            case 1:
-                System.out.println("A fight broke out!");
-               // hero.attackEnemy();
-                break;
-            case 2:
-                System.out.println("You tried to flee. " + "It didn't work.");
-                break;
-            case 3:
-                /// metod for use item
-                System.out.println("You healed"); // + hp regen
-                break;
+            switch (whatToDO) {
+                case 1:
+                    System.out.println("A fight broke out!");
+                    //hero.attackEnemy();
+                    break;
+                case 2:
+                    System.out.println("You tried to flee. " + "It didn't work.");
+                    break;
+                case 3:
+                    /// metod for use item
+                    System.out.println("You healed"); // + hp regen
+                    break;
+            }
         }
-
     }
 
     private void treasure() {

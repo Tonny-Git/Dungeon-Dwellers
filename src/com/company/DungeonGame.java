@@ -111,7 +111,7 @@ public class DungeonGame {
         } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getRoomItems() != null) { // finns det kista?
             treasure();
 
-        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).isEmpty()) { // är det tomt?
+        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getIsEmpty()) { // är det tomt?
             empty();
 
         } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).isBossRoom()) { // är det bossen?

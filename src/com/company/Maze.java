@@ -11,7 +11,7 @@ public class Maze {
     private Room[][] mazeArray;
     private int[] mazePositions;
     private int heroPositionX = 0;
-    private int getHeroPositionY = 0;
+    private int heroPositionY = 0;
 
 
     public Maze() {
@@ -93,8 +93,10 @@ public class Maze {
                     mazePositions[i] = 3;
                 } else if (randomPositions.indexOf(i) < numOfMonster + numOfItems + numOfMonsterAndItems && randomPositions.indexOf(i) >= numOfMonster + numOfItems) {
                     mazePositions[i] = 4;
-                } else {
+                } else if (randomPositions.indexOf(i) == randomPositions.size()-2){
                     mazePositions[i] = 5;
+                } else {
+                    mazePositions[i] = 6;
                 }
             } else {
                 mazePositions[i] = 1;
@@ -104,10 +106,10 @@ public class Maze {
 
     private ArrayList<Integer> randomMonsterAndItemPosition(int numOfMonster, int numOfItems, int numOfMonsterAndItems) {
         ArrayList<Integer> randomPositions = new ArrayList<>();
-        int numTotalt = numOfMonster + numOfItems + numOfMonsterAndItems + 1; //1 For the dragon boss
-        for (int i = 0; i < numTotalt; i++) {
-            int randomNum = (int) Math.floor(Math.random() * (mapSize * mapSize));
-            if (randomNum % mapSize == 0 || randomNum % mapSize == mapSize - 1 || randomNum < mapSize || randomNum > mapSize * mapSize - mapSize) {
+        int numTotalt = numOfMonster + numOfItems + numOfMonsterAndItems + 2; //1 For the dragon boss and toothbrush
+        for(int i = 0; i < numTotalt; i++) {
+            int randomNum = (int)Math.floor(Math.random()*(mapSize*mapSize));
+            if(randomNum % mapSize == 0 || randomNum % mapSize == mapSize-1 || randomNum < mapSize || randomNum > mapSize*mapSize - mapSize) {
                 i--;
             } else {
                 if (!randomPositions.contains(randomNum)) {
@@ -120,48 +122,33 @@ public class Maze {
         return randomPositions;
     }
 
-    private void createMap() {
-
-        for (int inter : mazePositions) {
-
-            int counter = 0;
-            int i = 0;
-            int j;
-
-            for (j = 0; j < mapSize; j++) {
-                if (j == mapSize - 1) {
-                    j = 0;
-                    counter++;
-                    i = counter;
-                    if (counter == mapSize - 1) {
-                        break;
-                    }
-                }
+    public void createMap() {
+        int numPos = 0;
+        for (int i = 0; i < mazeArray.length; i++) {
+            for (int j = 0; j < mazeArray[i].length; j++) {
+                mazeArray[i][j] = new Room(mazePositions[numPos]);
+                numPos++;
             }
-            mazeArray[i][j] = new Room(inter);
-            //System.out.println(mazeArray[i][j]);
-            System.out.println("i:"+i+", j:"+j);
         }
     }
 
         public void updateHeroPosition(int x, int y) {
 
-        int heroPositionX = x;
-        int getHeroPositionY = y;
+        this.heroPositionX = x;
+        this.heroPositionY = y;
     }
 
     @Override
     public String toString() {
-        createMap();
         String outputString = "[]";
 
         for (int i = 0; i < mazeArray.length; i++) {
             for (int j = 0; j < mazeArray.length; j++) {
 
-                if (heroPositionX == i && getHeroPositionY == j) {
+                if (this.heroPositionX == i && this.heroPositionY == j) {
                     outputString += " " + " H ";
                 } else {
-                    outputString += " " + mazeArray[i][j].toString();
+                    outputString += " " + mazeArray[i][j];
                 }
             }
             outputString += "\n";

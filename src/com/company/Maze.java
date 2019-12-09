@@ -148,7 +148,7 @@ public class Maze {
                 if (heroPositionX == i && heroPositionY == j) {
                     outputString += " " + " H ";
                 } else {
-                    outputString += " " + mazeArray[i][j].toString();
+                    outputString += " " + mazeArray[i][j];
                 }
             }
             outputString += "\n";

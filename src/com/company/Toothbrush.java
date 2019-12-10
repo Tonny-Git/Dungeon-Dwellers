@@ -7,6 +7,6 @@ public class Toothbrush extends Items {
 
     @Override
     public void useItem() {
-
+        System.out.println("You cant use this item!");
     }
 }

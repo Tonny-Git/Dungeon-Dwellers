@@ -18,13 +18,27 @@ public class DungeonGame {
     private void mainMenu() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("---- Welcome to Dungeon Dwellers ----");
+        int choice;
 
-        System.out.println(
-                "1. Start game " + "\n" +
-                        "2. Load game " + "\n" +
-                        "3. Exit game " + "\n");
+        while (true) {
+            System.out.println("1. Start game " + "\n" +
+                            "2. Load game " + "\n" +
+                            "3. Exit game " + "\n");
 
-        int choice = scanner.nextInt();
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (Exception e) {
+                System.out.println("Can only input numbers, please try again!");
+                continue;
+            }
+
+            if (choice > 0 && choice <= 3) {
+                break;
+            } else {
+                System.out.println("Number is out of bound, please try again!");
+            }
+
+        }
 
         switch (choice) {
 

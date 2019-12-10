@@ -15,4 +15,12 @@ public class CupOfCoffee extends Items {
     public void useItem() {
 
     }
+
+    @Override
+    public String toString() {
+        return "CupOfCoffee{" +
+                "heal=" + heal +
+                "weight=" + getWeight() +
+                '}';
+    }
 }

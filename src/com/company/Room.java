@@ -6,7 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Room extends Position {
 
 
-    private CupOfCoffee coffe = new CupOfCoffee("Covfefe", 20);
+    private CupOfCoffee coffee = new CupOfCoffee("Covfefe", 20);
     private Toothbrush toothbrush = new Toothbrush("Tooth brush", 3);
     private Gold gold = new Gold("Gold Coin", 1);
     private GoldChest goldChest = new GoldChest("Gold Chest", 100);
@@ -103,7 +103,7 @@ public class Room extends Position {
 
         switch (randomNum) {
             case 0:
-                roomItems.add(coffe);
+                roomItems.add(coffee);
                 placeGoldRoom();
                 break;
             case 1:

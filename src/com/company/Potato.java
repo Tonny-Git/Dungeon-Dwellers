@@ -15,4 +15,12 @@ public class Potato extends Items {
     public void useItem() {
 
     }
+
+    @Override
+    public String toString() {
+        return "Potato{" +
+                "heal=" + heal +
+                "weight=" + getWeight() +
+                '}';
+    }
 }

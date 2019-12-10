@@ -15,4 +15,12 @@ public class Beef extends Items {
     public void useItem() {
 
     }
+
+    @Override
+    public String toString() {
+        return "Beef{" +
+                "heal=" + heal +
+                "weight=" + getWeight() +
+                '}';
+    }
 }

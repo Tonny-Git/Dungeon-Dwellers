@@ -3,9 +3,8 @@ package com.company;
 public class Carrot extends Items {
     private int heal = 10;
 
-    public Carrot(String name, int weight, int heal) {
-        super(name, weight);
-        this.heal = heal;
+    public Carrot() {
+        super("Ugly carrot", 1);
     }
 
     public int getHeal() {

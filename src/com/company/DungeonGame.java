@@ -78,8 +78,10 @@ public class DungeonGame implements Serializable {
     }
 
     private void startGame() {
-
-        this.hero = new Hero("pelle");
+        System.out.println("Enter your heros name: ");
+        Scanner scanner = new Scanner(System.in);
+        String heroName = scanner.nextLine();
+        this.hero = new Hero(heroName);
         System.out.println("Hero " + hero.getName() + " created");
         this.maze = new Maze();
 

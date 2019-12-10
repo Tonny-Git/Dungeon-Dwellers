@@ -118,8 +118,8 @@ public class Maze {
     }
 
     public void randomPosition() {
-        int numOfMonster = (int) Math.floor((Math.random() * 5) + 3);
-        int numOfItems = (int) Math.floor((Math.random() * 3) + 2);
+        int numOfMonster = (int) Math.floor((Math.random() * mapSize) + 3);
+        int numOfItems = (int) Math.floor((Math.random() * mapSize/3) + 2);
         int numOfMonsterAndItems = (int) Math.floor((Math.random() * 4));
         ArrayList<Integer> randomWallPositions = randomizeWalls();
         ArrayList<Integer> randomPositions = randomMonsterAndItemPosition(numOfMonster, numOfItems, numOfMonsterAndItems, randomWallPositions);

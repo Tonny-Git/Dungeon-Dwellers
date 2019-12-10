@@ -157,7 +157,7 @@ public class Room {
         String retuner = "[ ]";
 
         if (hasWall) {
-            retuner = "W";
+            retuner = " W ";
         }
         return retuner;
     }

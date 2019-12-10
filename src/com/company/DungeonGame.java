@@ -83,15 +83,28 @@ public class DungeonGame {
 
         while (!exitGame) {
             showMap();
-            System.out.println("--- Where do you want to go " + hero.getName() + "? ---");
-            System.out.println(
-                    "1. Up" + "\n" +
-                            "2. Down" + "\n" +
-                            "3. Left" + "\n" +
-                            "4. Right" + "\n" +
-                            "5. Save and exit");
 
-            int whereTo = scanner.nextInt();
+            int whereTo;
+            try {
+                System.out.println("--- Where do you want to go " + hero.getName() + "? ---");
+                System.out.println("1. Up" + "\n" +
+                                "2. Down" + "\n" +
+                                "3. Left" + "\n" +
+                                "4. Right" + "\n" +
+                                "5. Save and exit");
+                whereTo = Integer.parseInt(scanner.nextLine());
+            } catch (Exception e) {
+                System.out.println("Can only input numbers, please try again!");
+                System.out.println("Press enter to continue. . .");
+                scanner.nextLine();
+                continue;
+            }
+            if (whereTo < 1 || whereTo > 5) {
+                System.out.println("Number is out of bound, please try again!");
+                System.out.println("Press enter to continue. . .");
+                scanner.nextLine();
+                continue;
+            }
 
             switch (whereTo) {
                 case 1:

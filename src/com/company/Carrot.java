@@ -11,7 +11,7 @@ public class Carrot extends Items {
     public int getHeal() {
         return heal;
     }
-    
+
     @Override
     public void useItem() {
 

@@ -3,8 +3,8 @@ package com.company;
 public class CupOfCoffee extends Items {
     private int heal = 50;
 
-    public CupOfCoffee(String name, int weight) {
-        super(name, weight);
+    public CupOfCoffee() {
+        super("Yesterdays coffee", 3);
     }
 
     public int getHeal() {

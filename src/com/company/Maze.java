@@ -42,29 +42,7 @@ public class Maze {
     public Room[][] getMazeArray() {
         return this.mazeArray;
     }
-
-
-    private boolean makeWall(int col, int row) {
-
-        int wallCounter = 0;
-        boolean returner;
-
-
-        for (int i = -1; i <= 1; i++) {
-            if (mazeArray[col + i][row].getWall()) {
-                wallCounter++;
-                if (mazeArray[col][row + i].getWall()) {
-                    wallCounter++;
-                }
-            }
-        }
-        if (wallCounter > 2) {
-            returner = true;
-        } else {
-            returner = false;
-        }
-        return returner;
-    }
+    
 
     public boolean canIgoHere(int X, int Y) {
         boolean out;

@@ -7,13 +7,7 @@ public class Room {
 
     private Items item;
 
-    private CupOfCoffee coffee = new CupOfCoffee("Coffee", 20);
-    private Toothbrush toothbrush = new Toothbrush("Toothbrush", 3);
-    private Gold gold = new Gold("Gold Coin", 1);
-    private GoldChest goldChest = new GoldChest("Gold Chest", 100);
-    private Bandit bandit = new Bandit();
-    private Spider spider = new Spider();
-    private DragonBoss dragon = new DragonBoss();
+    private Monster monster;
 
 
     public int getRoomGold() {
@@ -104,7 +98,7 @@ public class Room {
 
         switch (randomNum) {
             case 0:
-                roomItems.add(coffee);
+                item = new CupOfCoffee("Covfefe", 20);
                 placeGoldRoom();
                 break;
 

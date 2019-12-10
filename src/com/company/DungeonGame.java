@@ -202,8 +202,6 @@ public class DungeonGame implements Serializable {
         }
     }
 
-    //Ta bort senare
-
     private void dropToothbrushSomewhereInDungeon() {
         boolean cont = false;
         do {

@@ -98,7 +98,26 @@ public class Room {
 
         switch (randomNum) {
             case 0:
-                item = new CupOfCoffee("Covfefe", 20);
+                int randomNumItem = ThreadLocalRandom.current().nextInt(0, 4);
+
+                switch (randomNumItem) {
+                    case 0:
+                        item = new CupOfCoffee("Covfefe", 20);
+                        roomGold.add(item);
+                        break;
+                    case 1:
+                        item = new Potato();
+                        roomGold.add(item);
+                        break;
+                    case 2:
+                        item = new Carrot();
+                        roomGold.add(item);
+                        break;
+                    case 3:
+                        item = new Beef();
+                        roomGold.add(item);
+                        break;
+                }
                 placeGoldRoom();
                 break;
 
@@ -107,6 +126,9 @@ public class Room {
                 Gold goldCoin = new Gold("Gold Coin", 1);
                 roomGold.add(goldCoin);
                 placeGoldRoom();
+                break;
+
+            case 2:
 
         }
     }

@@ -3,7 +3,7 @@ package com.company;
 import java.util.ArrayList;
 
 public class Hero extends Creature {
-    //private Backpack backpack = new Backpack(); //Implementera när backpack finns
+
     private int lvl = 1;
     private int totalExp = 0;
     private int positionX = 2;
@@ -13,10 +13,6 @@ public class Hero extends Creature {
     public Hero(String name) {
         super(name, 100, 10);
 
-    }
-
-    public void putItemIntoBackpack() {
-        //Lägg till kod som kallar på en funktion i backpack
     }
 
     public void gainedExperiencePoints(int experiencePoints) {
@@ -43,7 +39,6 @@ public class Hero extends Creature {
 
     public void attackEnemy(Creature attackCreature) {
         int typeOfAttack = (int)Math.floor(Math.random() * 100);
-        System.out.println(typeOfAttack);
         if(typeOfAttack < 10) {
             handleSpecialAttack(attackCreature, getDamage()*2);
         } else {
@@ -53,7 +48,7 @@ public class Hero extends Creature {
 
     public void handleSpecialAttack(Creature attackCreature, int damage) {
         attackCreature.getDamaged(damage);
-        System.out.printf("%s did a critical attack for %d damage.", getName(), damage);
+        System.out.printf("%s did a critical attack for %d damage. %s has %d hp left\n", getName(), damage, attackCreature.getName(), attackCreature.getHealth());
     }
 
     public void setPosition(int positionX, int positionY) {

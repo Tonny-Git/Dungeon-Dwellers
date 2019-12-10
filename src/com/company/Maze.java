@@ -118,8 +118,8 @@ public class Maze {
     }
 
     public void randomPosition() {
-        int numOfMonster = (int) Math.floor((Math.random() * 5) + 3);
-        int numOfItems = (int) Math.floor((Math.random() * 3) + 2);
+        int numOfMonster = (int) Math.floor((Math.random() * 3) + mapSize);
+        int numOfItems = (int) Math.floor((Math.random() * 2) + mapSize/3);
         int numOfMonsterAndItems = (int) Math.floor((Math.random() * 4));
         ArrayList<Integer> randomWallPositions = randomizeWalls();
         ArrayList<Integer> randomPositions = randomMonsterAndItemPosition(numOfMonster, numOfItems, numOfMonsterAndItems, randomWallPositions);
@@ -153,7 +153,7 @@ public class Maze {
             if (randomNum % mapSize == 0 || randomNum % mapSize == mapSize - 1 || randomNum < mapSize || randomNum > mapSize * mapSize - mapSize) {
                 i--;
             } else {
-                if (!randomPositions.contains(randomNum) || !randomWallPositions.contains(randomNum)) {
+                if (!randomPositions.contains(randomNum) && !randomWallPositions.contains(randomNum)) {
                     randomPositions.add(randomNum);
                 } else {
                     i--;

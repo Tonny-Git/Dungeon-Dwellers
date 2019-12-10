@@ -1,5 +1,6 @@
 package com.company;
 
+import javax.lang.model.element.Element;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,7 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Maze {
 
-    private int mapSize = 10;
+    private int mapSize;
     private Room[][] mazeArray;
     private int[] mazePositions;
     private int heroPositionX = 2;
@@ -18,11 +19,26 @@ public class Maze {
     public Maze() {
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("How big map do you want?" + "\n" + "(Standard is 15 by 15)");
-        int scannerInput = scanner.nextInt();
+        while(true) {
+            int scannerInput;
+            try {
+                System.out.println("How big map do you want?" + "\n" + "(Standard is 15 by 15)");
+                scannerInput = Integer.parseInt(scanner.nextLine());
+            } catch (Exception e) {
+                System.out.println("You can only input numbers, please try again!");
+                System.out.println("Press enter to continue. . . ");
+                scanner.nextLine();
+                continue;
+            }
+            if (scannerInput >= 15 && scannerInput <= 40) {
+                mapSize = scannerInput;
+                break;
+            } else if(scannerInput < 15) {
+                System.out.println("Size is out of range. Minimum size is 15 ");
+            } else {
+                System.out.println("Size is out of range. Maximum size is 40 ");
+            }
 
-        if (scannerInput > 0 && scannerInput < 40) {
-            this.mapSize = scannerInput;
         }
 
         mazePositions = new int[mapSize * mapSize];
@@ -135,10 +151,10 @@ public class Maze {
             }
         }
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < size/3; i++) {
             int num1 = (int)Math.floor(Math.random()*size);
             int num2 = (int)Math.floor(Math.random()*size);
-            int totalNum = num1*15 + num2;
+            int totalNum = num1*size + num2;
             boolean skip = false;
 
             if (totalNum % size == 0 || totalNum % size == size - 1 || totalNum < size || totalNum > size * size - size) {

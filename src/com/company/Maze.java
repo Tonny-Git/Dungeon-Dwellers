@@ -5,11 +5,13 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Maze{
+public class Maze {
 
     private int mapSize = 10;
     private Room[][] mazeArray;
     private int[] mazePositions;
+    private int heroPositionX = 0;
+    private int heroPositionY = 0;
 
 
     public Maze() {
@@ -22,45 +24,21 @@ public class Maze{
             this.mapSize = scannerInput;
         }
 
+        mazePositions = new int[mapSize * mapSize];
+        randomPosition();
         mazeArray = new Room[mapSize][mapSize];
+        System.out.println(mazePositions);
+        createMap();
 
-       // System.out.println(Arrays.deepToString(mazeArray));
-
-        for (int col = 0; col < mazeArray.length; col++) {
-
-            for (int row = 0; row < mazeArray.length; row++) {
-                if ((mazeArray[col][row] == (mazeArray[col][0])) || ((mazeArray[col][row] == (mazeArray[0][row])))){
-                    mazeArray[col][row] = new Room(col, row, 0);
-
-                }
-
-
-
-                else {
-                    int randomNum = ThreadLocalRandom.current().nextInt(0, 5);
-                    mazeArray[col][row] = new Room(col, row, randomNum);
-                }
-                mazeArray[1][scannerInput-2] = new Room(col, row, 1); // ska vara tomm
-                mazeArray[mapSize-1][row] = new Room(mapSize-1, col, 0);
-
-            }
-            mazeArray[col][mapSize-1] = new Room(col, mapSize-1, 0);
-
-        }
-
-
-        //System.out.println(Arrays.deepToString(mazeArray));
-        mazePositions = new int[mapSize*mapSize];
     }
-
-
 
     public Room getMazeRoom(int xPosition, int yPosition) {
 
         return mazeArray[xPosition][yPosition];
 
     }
-    public Room[][] getMazeArray(){
+
+    public Room[][] getMazeArray() {
         return this.mazeArray;
     }
 
@@ -79,7 +57,11 @@ public class Maze{
                 }
             }
         }
-        returner = wallCounter > 2;
+        if (wallCounter > 2) {
+            returner = true;
+        } else {
+            returner = false;
+        }
         return returner;
     }
 
@@ -95,24 +77,26 @@ public class Maze{
         return out;
     }
 
-    public void randomPosition () {
-        int numOfMonster = (int)Math.floor((Math.random()*5)+3);
-        int numOfItems = (int)Math.floor((Math.random()*3)+2);
-        int numOfMonsterAndItems = (int)Math.floor((Math.random()*4));
+    public void randomPosition() {
+        int numOfMonster = (int) Math.floor((Math.random() * 5) + 3);
+        int numOfItems = (int) Math.floor((Math.random() * 3) + 2);
+        int numOfMonsterAndItems = (int) Math.floor((Math.random() * 4));
         ArrayList<Integer> randomPositions = randomMonsterAndItemPosition(numOfMonster, numOfItems, numOfMonsterAndItems);
 
-        for(int i = 0; i < mapSize*mapSize; i++) {
-            if(i % mapSize == 0 || i % mapSize == mapSize-1 || i < mapSize || i > mapSize*mapSize - mapSize) {
+        for (int i = 0; i < mapSize * mapSize; i++) {
+            if (i % mapSize == 0 || i % mapSize == mapSize - 1 || i < mapSize || i > mapSize * mapSize - mapSize) {
                 mazePositions[i] = 0;
-            } else if(randomPositions.contains(i)) {
-                if(randomPositions.indexOf(i) < numOfMonster) {
+            } else if (randomPositions.contains(i)) {
+                if (randomPositions.indexOf(i) < numOfMonster) {
                     mazePositions[i] = 2;
-                } else if(randomPositions.indexOf(i) < numOfMonster+numOfItems && randomPositions.indexOf(i) >= numOfMonster) {
+                } else if (randomPositions.indexOf(i) < numOfMonster + numOfItems && randomPositions.indexOf(i) >= numOfMonster) {
                     mazePositions[i] = 3;
-                } else if (randomPositions.indexOf(i) < numOfMonster+numOfItems+numOfMonsterAndItems && randomPositions.indexOf(i) >= numOfMonster+numOfItems) {
+                } else if (randomPositions.indexOf(i) < numOfMonster + numOfItems + numOfMonsterAndItems && randomPositions.indexOf(i) >= numOfMonster + numOfItems) {
                     mazePositions[i] = 4;
-                } else {
+                } else if (randomPositions.indexOf(i) == randomPositions.size()-2){
                     mazePositions[i] = 5;
+                } else {
+                    mazePositions[i] = 6;
                 }
             } else {
                 mazePositions[i] = 1;
@@ -120,15 +104,15 @@ public class Maze{
         }
     }
 
-    private ArrayList<Integer> randomMonsterAndItemPosition (int numOfMonster, int numOfItems, int numOfMonsterAndItems) {
+    private ArrayList<Integer> randomMonsterAndItemPosition(int numOfMonster, int numOfItems, int numOfMonsterAndItems) {
         ArrayList<Integer> randomPositions = new ArrayList<>();
-        int numTotalt = numOfMonster + numOfItems + numOfMonsterAndItems + 1; //1 For the dragon boss
+        int numTotalt = numOfMonster + numOfItems + numOfMonsterAndItems + 2; //1 For the dragon boss and toothbrush
         for(int i = 0; i < numTotalt; i++) {
             int randomNum = (int)Math.floor(Math.random()*(mapSize*mapSize));
             if(randomNum % mapSize == 0 || randomNum % mapSize == mapSize-1 || randomNum < mapSize || randomNum > mapSize*mapSize - mapSize) {
                 i--;
             } else {
-                if(!randomPositions.contains(randomNum)) {
+                if (!randomPositions.contains(randomNum)) {
                     randomPositions.add(randomNum);
                 } else {
                     i--;
@@ -138,19 +122,36 @@ public class Maze{
         return randomPositions;
     }
 
+    public void createMap() {
+        int numPos = 0;
+        for (int i = 0; i < mazeArray.length; i++) {
+            for (int j = 0; j < mazeArray[i].length; j++) {
+                mazeArray[i][j] = new Room(mazePositions[numPos]);
+                numPos++;
+            }
+        }
+    }
+
+        public void updateHeroPosition(int x, int y) {
+
+        this.heroPositionX = x;
+        this.heroPositionY = y;
+    }
+
     @Override
     public String toString() {
-        String outputString = "";
-
+        String outputString = "[]";
 
         for (int i = 0; i < mazeArray.length; i++) {
+            for (int j = 0; j < mazeArray.length; j++) {
 
-            for (int j = 0; j < mazeArray[i].length; j++) {
-                outputString += " " + mazeArray[i][j];
-
+                if (this.heroPositionX == i && this.heroPositionY == j) {
+                    outputString += " " + " H ";
+                } else {
+                    outputString += " " + mazeArray[i][j];
+                }
             }
             outputString += "\n";
-
         }
         return outputString;
     }

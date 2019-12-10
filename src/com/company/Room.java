@@ -99,7 +99,6 @@ public class Room {
         switch (randomNum) {
             case 0:
                 item = new CupOfCoffee("Covfefe", 20);
-
                 placeGoldRoom();
                 break;
 

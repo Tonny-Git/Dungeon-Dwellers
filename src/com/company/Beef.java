@@ -1,10 +1,11 @@
 package com.company;
 
-public class CupOfCoffee extends Items {
-    private int heal = 50;
+public class Beef extends Items {
+    private int heal = 100;
 
-    public CupOfCoffee(String name, int weight) {
+    public Beef(String name, int weight, int heal) {
         super(name, weight);
+        this.heal = heal;
     }
 
     public int getHeal() {

@@ -16,10 +16,6 @@ public class Maze {
 
 
     public Maze() {
-        int[] walls = makeWalls();
-        for (int inter : walls) {
-            System.out.println(inter);
-        }
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("How big map do you want?" + "\n" + "(Standard is 15 by 15)");
@@ -52,7 +48,7 @@ public class Maze {
         return (int) (Math.random() * range) + min;
     }
 
-    private int[] makeWalls() {
+    /*private int[] makeWalls() {
 
         // 1 == wall
         // 0 == empty
@@ -92,7 +88,7 @@ public class Maze {
         }
         return wallArray;
     }
-
+ */
     public boolean canIgoHere(int X, int Y) {
         boolean out;
 

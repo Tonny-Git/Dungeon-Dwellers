@@ -1,17 +1,29 @@
 package com.company;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class DungeonGame {
+public class DungeonGame implements Serializable {
 
     private Maze maze;
     private Hero hero;
     private boolean exitGame = false;
     private int keydropped = 0;
+    private DungeonGame game;
+    private int lastKnownHeroPosX;
+    private int lastKnownHeroPosY;
+
 
     public DungeonGame() {
         mainMenu();
+
+    }
+
+    public void setSaveGame(DungeonGame game) {
+        this.game = game;
 
     }
 
@@ -49,16 +61,18 @@ public class DungeonGame {
                 loadGame();
                 break;
             case 3:
-                exitGame = true;
+                exitGame();
                 break;
         }
     }
 
     private void loadGame() {
-
+        System.out.println("Not implemented in beta. Wait for future updates");
+        mainMenu();
     }
 
     private void exitGame() {
+        saveGame(this.game);
         System.out.println("--- You exited the game ---");
         exitGame = true;
     }
@@ -73,7 +87,7 @@ public class DungeonGame {
 
         System.out.println("--- You entered the Dungeon ---");
 
-        updateHeroPosition(7, 7);
+        updateHeroPosition(1, 1);
         movement();
     }
 
@@ -109,25 +123,28 @@ public class DungeonGame {
             switch (whereTo) {
                 case 1:
                     if (maze.canIgoHere(hero.getPositionX() - 1, hero.getPositionY())) {
+                        setlastKnownHeroPos(hero.getPositionX(),hero.getPositionY());
                         updateHeroPosition(hero.getPositionX() - 1, hero.getPositionY());
-                        //hero.setPosition(hero.getPositionX(), hero.getPositionY() - 1);
                         enterRoom();
                     }
                     break;
                 case 2:
                     if (maze.canIgoHere(hero.getPositionX() + 1, hero.getPositionY())) {
+                        setlastKnownHeroPos(hero.getPositionX(),hero.getPositionY());
                         updateHeroPosition(hero.getPositionX() + 1, hero.getPositionY());
                         enterRoom();
                     }
                     break;
                 case 3:
                     if (maze.canIgoHere(hero.getPositionX(), hero.getPositionY() - 1)) {
+                        setlastKnownHeroPos(hero.getPositionX(),hero.getPositionY());
                         updateHeroPosition(hero.getPositionX(), hero.getPositionY() - 1);
                         enterRoom();
                     }
                     break;
                 case 4:
                     if (maze.canIgoHere(hero.getPositionX(), hero.getPositionY() + 1)) {
+                        setlastKnownHeroPos(hero.getPositionX(),hero.getPositionY());
                         updateHeroPosition(hero.getPositionX(), hero.getPositionY() + 1);
                         enterRoom();
                     }
@@ -145,18 +162,15 @@ public class DungeonGame {
     private void enterRoom() {
         if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).isBossRoom()) { // är det bossen?
             boss();
-
-        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getMonster() != null) { // finns det monster?
-            fight();
-
-        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getRoomItems() != null) { // finns det kista?
-            treasure();
-
         } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getIsEmpty()) { // är det tomt?
             empty();
-
+        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getMonster() != null) { // finns det monster?
+            fight();
+        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getRoomItems() != null) { // finns det kista?
+            treasure();
         }
     }
+
 
     private void boss() {
         Scanner scanner = new Scanner(System.in);
@@ -200,7 +214,7 @@ public class DungeonGame {
                 maze.getMazeArray()[randomNum][randomNum].placeToothbrushRoom();
                 cont = true;
             }
-        } while(!cont);
+        } while (!cont);
     }
 
     private void empty() {
@@ -223,11 +237,14 @@ public class DungeonGame {
                 case 1:
                     hero.attackEnemy(monsterInRoom);
                     if (monsterInRoom.getHealth() <= 0) {
+                        maze.getMazeRoom(hero.getPositionX(),hero.getPositionY()).setEmpty(true);
                         fightActive = false;
                     }
                     break;
                 case 2:
-                    System.out.println("You tried to flee. " + "It didn't work.");
+                    System.out.println("You fled back to the room you came from.");
+                    updateHeroPosition(this.lastKnownHeroPosX,this.lastKnownHeroPosY);
+                    movement();
                     break;
                 case 3:
                     /// metod for use item
@@ -260,12 +277,12 @@ public class DungeonGame {
             /*int gold = maze.getMazeRoom(hero.getPositionX(), hero.getPositionY().());
             hero.addGold(gold);
 */
-            System.out.println("Picked up gold " + "gold");
+            System.out.println("Picked up gold " + randomNum);
         } else if (input.toLowerCase().equals("n")) {
             System.out.println("Left gold");
         } else {
             System.out.println("You fucked up. " + "Lost 2 HP for being stupid ");
-            hero.setHealth(-2);
+            hero.setHealth(hero.getHealth()-2);
             System.out.println("You now have " + hero.getHealth() + "Hp.");
         }
     }
@@ -273,6 +290,24 @@ public class DungeonGame {
     private void updateHeroPosition(int x, int y) {
         hero.setPosition(x, y);
         maze.updateHeroPosition(x, y);
+    }
+    private void setlastKnownHeroPos(int x, int y) {
+        this.lastKnownHeroPosX = x;
+        this.lastKnownHeroPosY = y;
+    }
+
+
+    private static void saveGame(Object object) {
+        ObjectOutputStream objectOutputStream = null;
+        FileOutputStream fileOutputStream = null;
+        try {
+            fileOutputStream = new FileOutputStream("dungeonDweller.dat", false);
+            objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(object);
+            objectOutputStream.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 /*
     @Override

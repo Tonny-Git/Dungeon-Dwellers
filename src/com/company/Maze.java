@@ -1,7 +1,6 @@
 package com.company;
 
-import javax.lang.model.element.Element;
-import java.sql.SQLOutput;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -60,6 +59,52 @@ public class Maze {
     }
     
 
+    int randomWithRange(int min, int max) {
+        int range = (max - min) + 1;
+        return (int) (Math.random() * range) + min;
+    }
+
+    /*private int[] makeWalls() {
+
+        // 1 == wall
+        // 0 == empty
+
+        int wallCounter = 0;
+        int[] wallArray = new int[mapSize * mapSize];
+
+        for (int y = 0; y < wallArray.length; y++) {
+            int randomNum = randomWithRange(0, 1);
+            wallArray[y] = randomNum;
+        }
+
+        for (int i = 0; i < wallArray.length; i++) {
+            if (i < mapSize || i >= wallArray.length - mapSize || i % mapSize == mapSize - 1 || i % mapSize == 0) {
+                wallArray[i] = 1;
+            } else {
+                if (wallArray[i + 1] == 1) {
+                    wallCounter++;
+                }
+                if (wallArray[i - 1] == 1) {
+                    wallCounter++;
+                }
+                if (wallArray[i + mapSize] == 1) {
+                    wallCounter++;
+                }
+                if (i > mapSize && wallArray[i - mapSize] == 1) {
+                    wallCounter++;
+                }
+            }
+
+            if (wallCounter > 2) {
+                wallArray[i] = 0;
+            } else {
+                wallArray[i] = 1;
+            }
+            wallCounter = 0;
+        }
+        return wallArray;
+    }
+ */
     public boolean canIgoHere(int X, int Y) {
         boolean out;
 
@@ -89,7 +134,7 @@ public class Maze {
                     mazePositions[i] = 3;
                 } else if (randomPositions.indexOf(i) < numOfMonster + numOfItems + numOfMonsterAndItems && randomPositions.indexOf(i) >= numOfMonster + numOfItems) {
                     mazePositions[i] = 4;
-                } else if (randomPositions.indexOf(i) == randomPositions.size()-2){
+                } else if (randomPositions.indexOf(i) == randomPositions.size() - 2) {
                     mazePositions[i] = 5;
                 } else {
                     mazePositions[i] = 6;
@@ -103,9 +148,9 @@ public class Maze {
     private ArrayList<Integer> randomMonsterAndItemPosition(int numOfMonster, int numOfItems, int numOfMonsterAndItems, ArrayList<Integer> randomWallPositions) {
         ArrayList<Integer> randomPositions = new ArrayList<>();
         int numTotalt = numOfMonster + numOfItems + numOfMonsterAndItems + 2; //1 For the dragon boss and toothbrush
-        for(int i = 0; i < numTotalt; i++) {
-            int randomNum = (int)Math.floor(Math.random()*(mapSize*mapSize));
-            if(randomNum % mapSize == 0 || randomNum % mapSize == mapSize-1 || randomNum < mapSize || randomNum > mapSize*mapSize - mapSize) {
+        for (int i = 0; i < numTotalt; i++) {
+            int randomNum = (int) Math.floor(Math.random() * (mapSize * mapSize));
+            if (randomNum % mapSize == 0 || randomNum % mapSize == mapSize - 1 || randomNum < mapSize || randomNum > mapSize * mapSize - mapSize) {
                 i--;
             } else {
                 if (!randomPositions.contains(randomNum) || !randomWallPositions.contains(randomNum)) {
@@ -225,7 +270,7 @@ public class Maze {
         }
     }
 
-        public void updateHeroPosition(int x, int y) {
+    public void updateHeroPosition(int x, int y) {
 
         heroPositionX = x;
         heroPositionY = y;

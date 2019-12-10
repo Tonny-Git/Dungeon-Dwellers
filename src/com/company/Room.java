@@ -138,6 +138,10 @@ public class Room {
         return isEmpty;
     }
 
+    public void setEmpty(boolean trueOrFalse) {
+        this.isEmpty = trueOrFalse;
+    }
+
     public Monster getMonster() {
         return monster;
     }

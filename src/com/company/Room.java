@@ -99,7 +99,6 @@ public class Room {
         switch (randomNum) {
             case 0:
                 item = new CupOfCoffee("Covfefe", 20);
-
                 placeGoldRoom();
                 break;
 
@@ -137,6 +136,10 @@ public class Room {
 
     public boolean getIsEmpty() {
         return isEmpty;
+    }
+
+    public void setEmpty(boolean trueOrFalse) {
+        this.isEmpty = trueOrFalse;
     }
 
     public Monster getMonster() {

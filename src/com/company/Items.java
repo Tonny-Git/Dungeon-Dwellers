@@ -24,4 +24,6 @@ public abstract class Items {
     public String getName() {
         return name;
     }
+
+    public abstract void useItem();
 }

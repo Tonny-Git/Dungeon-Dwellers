@@ -10,4 +10,9 @@ public class CupOfCoffee extends Items {
     public int getHeal() {
         return heal;
     }
+
+    @Override
+    public void useItem() {
+
+    }
 }

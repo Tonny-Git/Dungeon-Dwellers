@@ -1,6 +1,6 @@
 package com.company;
 
-public class Items {
+public abstract class Items {
     private String name;
     private int weight;
 
@@ -24,4 +24,6 @@ public class Items {
     public String getName() {
         return name;
     }
+
+    public abstract void useItem();
 }

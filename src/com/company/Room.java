@@ -18,7 +18,6 @@ public class Room {
     private boolean hasWall = false;
 
 
-
     private ArrayList<Items> roomGold = new ArrayList<>();
     private boolean isBossRoom = false;
     private int roomType;
@@ -26,13 +25,8 @@ public class Room {
 
 
     public Room(int roomType) {
-
-
         this.roomType = roomType;
-
         makeRoom(roomType);
-
-
     }
 
     public void setHasWall(boolean hasWall) {
@@ -46,8 +40,8 @@ public class Room {
     public void setBossRoom() {
         monster = new DragonBoss();
         item = new GoldChest("Gold Chest", 100);
-            isBossRoom = true;
-        }
+        isBossRoom = true;
+    }
 
     public void makeRoom(int roomType) {
         switch (roomType) {
@@ -56,14 +50,12 @@ public class Room {
                 break;
             case 1:
                 isEmpty = true;
-
                 break;
             case 2:
-                placeLootRoom();
-
+                populateRoom();
                 break;
             case 3:
-                populateRoom();
+                placeLootRoom();
                 break;
             case 4:
                 placeLootRoom();
@@ -81,7 +73,7 @@ public class Room {
 
 
     public boolean getWall() {
-        return this.hasWall;
+        return hasWall;
     }
 
 
@@ -97,7 +89,6 @@ public class Room {
                 monster = new Spider();
 
 
-
         }
     }
 
@@ -107,10 +98,8 @@ public class Room {
         switch (randomNum) {
             case 0:
                 item = new CupOfCoffee("Covfefe", 20);
-
                 placeGoldRoom();
                 break;
-
 
 
             case 1:
@@ -121,7 +110,7 @@ public class Room {
         }
     }
 
-    public void placeToothbrushRoom(){
+    public void placeToothbrushRoom() {
         item = new Toothbrush("Tooth brush", 3);
 
 
@@ -140,9 +129,6 @@ public class Room {
     }
 
 
-
-
-
     public Items getRoomItems() {
         return item;
     }
@@ -151,20 +137,24 @@ public class Room {
         return isEmpty;
     }
 
+    public void setEmpty(boolean trueOrFalse) {
+        this.isEmpty = trueOrFalse;
+    }
+
     public Monster getMonster() {
         return monster;
     }
 
     public String getRoomInfo() {
-        return getWall() + " "  + getRoomItems();
+        return getWall() + " " + getRoomItems();
     }
 
     @Override
     public String toString() {
-        String retuner = " ";
+        String retuner = "[ ]";
 
-        if (this.hasWall) {
-            retuner = "W";
+        if (hasWall) {
+            retuner = " W ";
         }
         return retuner;
     }

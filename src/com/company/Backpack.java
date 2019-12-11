@@ -37,4 +37,16 @@ public class Backpack {
         }
         return null;
     }
+
+    public boolean removeItem(String itemName){
+        for (Items item : itemsInBackpack){
+            if (item.getName().contains(itemName)){
+                itemsInBackpack.remove(item);
+                return true;
+            }
+
+        }
+        System.out.println("Can't remove item...");
+        return false;
+    }
 }

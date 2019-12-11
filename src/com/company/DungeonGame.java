@@ -1,30 +1,56 @@
 package com.company;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class DungeonGame {
+public class DungeonGame implements Serializable {
 
     private Maze maze;
     private Hero hero;
     private boolean exitGame = false;
     private int keydropped = 0;
+    private DungeonGame game;
+    private int lastKnownHeroPosX;
+    private int lastKnownHeroPosY;
+
 
     public DungeonGame() {
         mainMenu();
 
     }
 
+    public void setSaveGame(DungeonGame game) {
+        this.game = game;
+
+    }
+
     private void mainMenu() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("---- Welcome to Dungeon Dwellers ----");
+        int choice;
 
-        System.out.println(
-                "1. Start game " + "\n" +
-                        "2. Load game " + "\n" +
-                        "3. Exit game " + "\n");
+        while (true) {
+            System.out.println("1. Start game " + "\n" +
+                            "2. Load game " + "\n" +
+                            "3. Exit game " + "\n");
 
-        int choice = scanner.nextInt();
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (Exception e) {
+                System.out.println("Can only input numbers, please try again!");
+                continue;
+            }
+
+            if (choice > 0 && choice <= 3) {
+                break;
+            } else {
+                System.out.println("Number is out of bound, please try again!");
+            }
+
+        }
 
         switch (choice) {
 
@@ -41,91 +67,118 @@ public class DungeonGame {
     }
 
     private void loadGame() {
-
+        System.out.println("Not implemented in beta. Wait for future updates");
+        mainMenu();
     }
 
     private void exitGame() {
+        saveGame(this.game);
         System.out.println("--- You exited the game ---");
-        this.exitGame = true;
+        exitGame = true;
     }
 
     private void startGame() {
-
-        this.hero = new Hero("pelle");
-        System.out.println( "Hero " + hero.getName() + " created");
-        this.maze = new Maze(14);
+        System.out.println("Enter your heros name: ");
+        Scanner scanner = new Scanner(System.in);
+        String heroName = scanner.nextLine();
+        this.hero = new Hero(heroName);
+        System.out.println("Hero " + hero.getName() + " created");
+        this.maze = new Maze();
 
         System.out.println("--- Loading map ---");
 
         System.out.println("--- You entered the Dungeon ---");
 
+        updateHeroPosition(1, 1);
         movement();
     }
 
     private void movement() {
 
         Scanner scanner = new Scanner(System.in);
-        while (this.exitGame = false) {
 
-            System.out.println("--- Where do you want to go " + hero.getName() + "? ---");
-            System.out.println(
-                    "1. Up" + "\n" +
-                            "2. Down" + "\n" +
-                            "3. Left" + "\n" +
-                            "4. Right");
+        while (!exitGame) {
+            showMap();
 
-            int whereoTo = scanner.nextInt();
+            int whereTo;
+            try {
+                System.out.println("--- Where do you want to go " + hero.getName() + "? ---");
+                System.out.println("1. Up" + "\n" +
+                                "2. Down" + "\n" +
+                                "3. Left" + "\n" +
+                                "4. Right" + "\n" +
+                                "5. Save and exit");
+                whereTo = Integer.parseInt(scanner.nextLine());
+            } catch (Exception e) {
+                System.out.println("Can only input numbers, please try again!");
+                System.out.println("Press enter to continue. . .");
+                scanner.nextLine();
+                continue;
+            }
+            if (whereTo < 1 || whereTo > 5) {
+                System.out.println("Number is out of bound, please try again!");
+                System.out.println("Press enter to continue. . .");
+                scanner.nextLine();
+                continue;
+            }
 
-            switch (whereoTo) {
+            switch (whereTo) {
                 case 1:
-                    if (maze.canIgoHere(hero.getPositionX(), hero.getPositionY() - 1)) {
-                        hero.setPosition(hero.getPositionX(), hero.getPositionY() - 1);
+                    if (maze.canIgoHere(hero.getPositionX() - 1, hero.getPositionY())) {
+                        setlastKnownHeroPos(hero.getPositionX(),hero.getPositionY());
+                        updateHeroPosition(hero.getPositionX() - 1, hero.getPositionY());
                         enterRoom();
                     }
                     break;
                 case 2:
-                    if (maze.canIgoHere(hero.getPositionX(), hero.getPositionY() + 1)) {
-                        hero.setPosition(hero.getPositionX(), hero.getPositionY() + 1);
+                    if (maze.canIgoHere(hero.getPositionX() + 1, hero.getPositionY())) {
+                        setlastKnownHeroPos(hero.getPositionX(),hero.getPositionY());
+                        updateHeroPosition(hero.getPositionX() + 1, hero.getPositionY());
                         enterRoom();
                     }
                     break;
                 case 3:
-                    if (maze.canIgoHere(hero.getPositionX() - 1, hero.getPositionY())) {
-                        hero.setPosition(hero.getPositionX() - 1, hero.getPositionY());
+                    if (maze.canIgoHere(hero.getPositionX(), hero.getPositionY() - 1)) {
+                        setlastKnownHeroPos(hero.getPositionX(),hero.getPositionY());
+                        updateHeroPosition(hero.getPositionX(), hero.getPositionY() - 1);
                         enterRoom();
                     }
                     break;
                 case 4:
-                    if (maze.canIgoHere(hero.getPositionX() + 1, hero.getPositionY())) {
-                        hero.setPosition(hero.getPositionX() + 1, hero.getPositionY());
+                    if (maze.canIgoHere(hero.getPositionX(), hero.getPositionY() + 1)) {
+                        setlastKnownHeroPos(hero.getPositionX(),hero.getPositionY());
+                        updateHeroPosition(hero.getPositionX(), hero.getPositionY() + 1);
                         enterRoom();
                     }
                     break;
+                case 5:
+                    exitGame();
             }
         }
     }
 
+    public void showMap() {
+        System.out.print(maze);
+    }
+
     private void enterRoom() {
-        if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getMonster() != null) { // finns det monster?
-            fight();
-
-        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getRoomItems() != null) { // finns det kista?
-            treasure();
-
+        if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).isBossRoom()) { // är det bossen?
+            boss();
         } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getIsEmpty()) { // är det tomt?
             empty();
-
-        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).isBossRoom()) { // är det bossen?
-            boss();
-
+        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getMonster() != null) { // finns det monster?
+            fight();
+        } else if (maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getRoomItems() != null) { // finns det kista?
+            treasure();
         }
-
     }
+
 
     private void boss() {
         Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
 
-        System.out.println(hero + "encountered The Elder Dragon!");
+        System.out.println(hero.getName() + " encountered The Elder Dragon!");
         if (hero.getTotalExp() >= 500 && hero.hasToothbrush()) {
             System.out.println(
                     "You gave the dragon her toothbrush" + "\n" +
@@ -137,11 +190,11 @@ public class DungeonGame {
                             "She wants you to find her toothbrush that's been lost in this dungeon." + "\n" +
                             "IF you retrieve it for her she will reward you greatly." + "\n" +
                             "Do you accept? Y/N");
-            if (scanner.nextLine().toLowerCase() == "y") {
+            if (input.toLowerCase().equals("y")) {
                 if (keydropped < 1) {
-                    //dropToothbrushSomewhereInDungeon();
+                    dropToothbrushSomewhereInDungeon();
                     keydropped++;
-                } else if (scanner.nextLine().toLowerCase() == "y" && keydropped >= 1) {
+                } else if (input.toLowerCase().equals("y") && keydropped >= 1) {
                     System.out.println("You have already taken upon you to complete the dragons quest");
                 } else {
                     System.out.println("You angered The Elder Dragon and she blasted you with a ball of fire");
@@ -152,29 +205,30 @@ public class DungeonGame {
     }
 
     //Ta bort senare
-    /*
-    private void dropToothbrushSomewhereInDungeon() {
 
-        boolean cont = true;
+    private void dropToothbrushSomewhereInDungeon() {
+        boolean cont = false;
         do {
-            int randomNum = ThreadLocalRandom.current().nextInt(0, maze.getMazeArray().length + 1);
+
+            int randomNum = ThreadLocalRandom.current().nextInt(0, maze.getMazeArray().length);
 
             if (!maze.getMazeRoom(randomNum, randomNum).getWall()) {
                 maze.getMazeArray()[randomNum][randomNum].placeToothbrushRoom();
-                cont = false;
+                cont = true;
             }
-        } while (cont);
+        } while (!cont);
     }
-    */
 
     private void empty() {
         System.out.println("This room is empty..");
     }
 
     private void fight() {
-        System.out.println(hero + "encountered" + maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getMonster()); // + MONSTER
+        boolean fightActive = true;
+        Monster monsterInRoom = maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).getMonster();
+        System.out.println(hero.getName() + " encountered " + monsterInRoom.getName());
 
-        while(true) {
+        while (fightActive) {
             System.out.println("1. Fight \n" +
                     "2. Flee \n" +
                     "3. Heal up");
@@ -183,11 +237,19 @@ public class DungeonGame {
 
             switch (whatToDO) {
                 case 1:
-                    System.out.println("A fight broke out!");
-                    //hero.attackEnemy();
+                    hero.attackEnemy(monsterInRoom);
+                    if (monsterInRoom.getHealth() <= 0) {
+                        hero.gainedExperiencePoints(monsterInRoom.getExperiencePoints());
+                        maze.getMazeRoom(hero.getPositionX(),hero.getPositionY()).setEmpty(true);
+                        fightActive = false;
+                    } else {
+                        monsterInRoom.attackEnemy(hero);
+                    }
                     break;
                 case 2:
-                    System.out.println("You tried to flee. " + "It didn't work.");
+                    System.out.println("You fled back to the room you came from.");
+                    updateHeroPosition(this.lastKnownHeroPosX,this.lastKnownHeroPosY);
+                    movement();
                     break;
                 case 3:
                     /// metod for use item
@@ -215,20 +277,44 @@ public class DungeonGame {
 */
 
         String input = scanner.nextLine();
-        if (input.toLowerCase() == "y") {
+        if (input.toLowerCase().equals("y")) {
 
             /*int gold = maze.getMazeRoom(hero.getPositionX(), hero.getPositionY().());
             hero.addGold(gold);
 */
-            System.out.println("Picked up gold " + "gold");
-        } else if (input.toLowerCase() == "n") {
-            System.out.println("Left item");
+            System.out.println("Picked up gold " + randomNum);
+        } else if (input.toLowerCase().equals("n")) {
+            System.out.println("Left gold");
         } else {
             System.out.println("You fucked up. " + "Lost 2 HP for being stupid ");
-            hero.setHealth(-2);
+            hero.setHealth(hero.getHealth()-2);
+            System.out.println("You now have " + hero.getHealth() + "Hp.");
         }
     }
 
+    private void updateHeroPosition(int x, int y) {
+        hero.setPosition(x, y);
+        maze.updateHeroPosition(x, y);
+    }
+    private void setlastKnownHeroPos(int x, int y) {
+        this.lastKnownHeroPosX = x;
+        this.lastKnownHeroPosY = y;
+    }
+
+
+    private static void saveGame(Object object) {
+        ObjectOutputStream objectOutputStream = null;
+        FileOutputStream fileOutputStream = null;
+        try {
+            fileOutputStream = new FileOutputStream("dungeonDweller.dat", false);
+            objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(object);
+            objectOutputStream.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+/*
     @Override
     public String toString() {
         String outputString = "";
@@ -244,5 +330,5 @@ public class DungeonGame {
             }
         }
         return outputString;
-    }
+    } */
 }

@@ -261,6 +261,7 @@ public class DungeonGame implements Serializable {
                     }
                     System.out.println("Which item do you want to use?");
                     int backpackUsage = scanner.nextInt();
+
                     hero.getBackpack().getItemsInBackpack().get(backpackUsage).useItem();
 
                     System.out.println("You healed up to " + hero.getHealth());

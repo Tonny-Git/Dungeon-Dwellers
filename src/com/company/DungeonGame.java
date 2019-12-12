@@ -192,7 +192,7 @@ public class DungeonGame implements Serializable {
                             "Do you accept? Y/N");
             if (input.toLowerCase().equals("y")) {
                 if (keydropped < 1) {
-                    dropToothbrushSomewhereInDungeon();
+                    //dropToothbrushSomewhereInDungeon();
                     keydropped++;
                 } else if (input.toLowerCase().equals("y") && keydropped >= 1) {
                     System.out.println("You have already taken upon you to complete the dragons quest");
@@ -205,7 +205,7 @@ public class DungeonGame implements Serializable {
     }
 
     //Ta bort senare
-
+/*
     private void dropToothbrushSomewhereInDungeon() {
         boolean cont = false;
         do {
@@ -218,7 +218,7 @@ public class DungeonGame implements Serializable {
             }
         } while (!cont);
     }
-
+*/
     private void empty() {
         System.out.println("This room is empty..");
     }

@@ -93,22 +93,37 @@ public class Room {
     }
 
     public void placeLootRoom() {
-        int randomNum = ThreadLocalRandom.current().nextInt(0, 2);
+       /* int randomNum = ThreadLocalRandom.current().nextInt(0, 1);
 
         switch (randomNum) {
+            case 0: */
+        int randomNumItem = ThreadLocalRandom.current().nextInt(0, 4 + 1);
+
+        switch (randomNumItem) {
             case 0:
-                item = new CupOfCoffee(1);
-                placeGoldRoom();
+                item = new CupOfCoffee();
+                roomGold.add(item);
                 break;
-
-
             case 1:
+                item = new Potato();
+                roomGold.add(item);
+                break;
+            case 2:
+                item = new Carrot();
+                roomGold.add(item);
+                break;
+            case 3:
+                item = new Beef();
+                roomGold.add(item);
+                break;
+            case 4:
                 Gold goldCoin = new Gold("Gold Coin", 1);
                 roomGold.add(goldCoin);
                 placeGoldRoom();
-
+                break;
         }
     }
+
 
     public void placeToothbrushRoom() {
         item = new Toothbrush("Tooth brush", 3);

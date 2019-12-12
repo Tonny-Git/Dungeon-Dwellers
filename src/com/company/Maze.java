@@ -14,7 +14,7 @@ public class Maze {
     private int heroPositionY = 14;
 
 
-    public Maze(int i) {
+    public Maze() {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("How big map do you want?" + "\n" + "(Standard is 15 by 15)");

@@ -239,7 +239,7 @@ public class DungeonGame implements Serializable {
                     hero.attackEnemy(monsterInRoom);
                     if (monsterInRoom.getHealth() <= 0) {
                         hero.gainedExperiencePoints(monsterInRoom.getExperiencePoints());
-                        maze.getMazeRoom(hero.getPositionX(),hero.getPositionY()).setEmpty(true);
+                        maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).setEmpty(true);
                         fightActive = false;
                     } else {
                         monsterInRoom.attackEnemy(hero);
@@ -247,7 +247,7 @@ public class DungeonGame implements Serializable {
                     break;
                 case 2:
                     System.out.println("You fled back to the room you came from.");
-                    updateHeroPosition(this.lastKnownHeroPosX,this.lastKnownHeroPosY);
+                    updateHeroPosition(this.lastKnownHeroPosX, this.lastKnownHeroPosY);
                     movement();
                     break;
                 case 3:
@@ -255,17 +255,18 @@ public class DungeonGame implements Serializable {
 
                     int index = 0;
 
-                    for (Items item: itemsInBackpack) {
+                    for (Items item : itemsInBackpack) {
                         index++;
                         System.out.println(index + "." + item + "\n");
                     }
                     System.out.println("Which item do you want to use?");
                     int backpackUsage = scanner.nextInt();
                     hero.getBackpack().getItemsInBackpack().get(backpackUsage).useItem();
-                    }
+
                     System.out.println("You healed up to " + hero.getHealth());
                     break;
             }
+        }
         }
 
     private void treasure() {

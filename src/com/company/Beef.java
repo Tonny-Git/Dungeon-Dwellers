@@ -1,10 +1,10 @@
 package com.company;
 
-public class CupOfCoffee extends Items {
-    private int heal = 50;
+public class Beef extends Items {
+    private int heal = 100;
 
-    public CupOfCoffee() {
-        super("Yesterdays coffee", 3);
+    public Beef() {
+        super("Super beef", 15);
     }
 
     public int getHeal() {
@@ -18,7 +18,7 @@ public class CupOfCoffee extends Items {
 
     @Override
     public String toString() {
-        return "CupOfCoffee{" +
+        return "Beef{" +
                 "heal=" + heal +
                 "weight=" + getWeight() +
                 '}';

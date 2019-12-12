@@ -52,11 +52,10 @@ public class Room {
                 isEmpty = true;
                 break;
             case 2:
-                placeLootRoom();
-
+                populateRoom();
                 break;
             case 3:
-                populateRoom();
+                placeLootRoom();
                 break;
             case 4:
                 placeLootRoom();
@@ -99,7 +98,6 @@ public class Room {
         switch (randomNum) {
             case 0:
                 item = new CupOfCoffee("Covfefe", 20);
-
                 placeGoldRoom();
                 break;
 
@@ -139,6 +137,10 @@ public class Room {
         return isEmpty;
     }
 
+    public void setEmpty(boolean trueOrFalse) {
+        this.isEmpty = trueOrFalse;
+    }
+
     public Monster getMonster() {
         return monster;
     }
@@ -152,7 +154,7 @@ public class Room {
         String retuner = "[ ]";
 
         if (hasWall) {
-            retuner = "W";
+            retuner = " W ";
         }
         return retuner;
     }

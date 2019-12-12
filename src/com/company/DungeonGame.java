@@ -79,8 +79,10 @@ public class DungeonGame implements Serializable {
     }
 
     private void startGame() {
-
-        this.hero = new Hero("pelle");
+        System.out.println("Enter your heros name: ");
+        Scanner scanner = new Scanner(System.in);
+        String heroName = scanner.nextLine();
+        this.hero = new Hero(heroName);
         System.out.println("Hero " + hero.getName() + " created");
         this.maze = new Maze();
 
@@ -236,8 +238,11 @@ public class DungeonGame implements Serializable {
                 case 1:
                     hero.attackEnemy(monsterInRoom);
                     if (monsterInRoom.getHealth() <= 0) {
+                        hero.gainedExperiencePoints(monsterInRoom.getExperiencePoints());
                         maze.getMazeRoom(hero.getPositionX(),hero.getPositionY()).setEmpty(true);
                         fightActive = false;
+                    } else {
+                        monsterInRoom.attackEnemy(hero);
                     }
                     break;
                 case 2:

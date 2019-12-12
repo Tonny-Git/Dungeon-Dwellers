@@ -52,11 +52,10 @@ public class Room {
                 isEmpty = true;
                 break;
             case 2:
-                placeLootRoom();
-
+                populateRoom();
                 break;
             case 3:
-                populateRoom();
+                placeLootRoom();
                 break;
             case 4:
                 placeLootRoom();

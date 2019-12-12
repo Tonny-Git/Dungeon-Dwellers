@@ -14,7 +14,7 @@ public abstract class Creature {
     //Skriva ut attack
     public void handleNormalAttack(Creature attackCreature) {
         attackCreature.getDamaged(damage);
-        System.out.printf("%s did a normal attack for %d damage.\n", name, damage);
+        System.out.printf("%s did a normal attack for %d damage. %s has %d hp left\n", name, damage, attackCreature.getName(), attackCreature.getHealth());
     }
 
     public abstract void handleSpecialAttack(Creature attackCreature, int damage);

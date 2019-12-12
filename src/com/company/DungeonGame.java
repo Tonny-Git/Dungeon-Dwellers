@@ -3,6 +3,7 @@ package com.company;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -192,7 +193,7 @@ public class DungeonGame implements Serializable {
                             "Do you accept? Y/N");
             if (input.toLowerCase().equals("y")) {
                 if (keydropped < 1) {
-                    dropToothbrushSomewhereInDungeon();
+                    //dropToothbrushSomewhereInDungeon();
                     keydropped++;
                 } else if (input.toLowerCase().equals("y") && keydropped >= 1) {
                     System.out.println("You have already taken upon you to complete the dragons quest");
@@ -203,9 +204,7 @@ public class DungeonGame implements Serializable {
             }
         }
     }
-
-    //Ta bort senare
-
+/*
     private void dropToothbrushSomewhereInDungeon() {
         boolean cont = false;
         do {
@@ -218,7 +217,7 @@ public class DungeonGame implements Serializable {
             }
         } while (!cont);
     }
-
+*/
     private void empty() {
         System.out.println("This room is empty..");
     }
@@ -240,7 +239,7 @@ public class DungeonGame implements Serializable {
                     hero.attackEnemy(monsterInRoom);
                     if (monsterInRoom.getHealth() <= 0) {
                         hero.gainedExperiencePoints(monsterInRoom.getExperiencePoints());
-                        maze.getMazeRoom(hero.getPositionX(),hero.getPositionY()).setEmpty(true);
+                        maze.getMazeRoom(hero.getPositionX(), hero.getPositionY()).setEmpty(true);
                         fightActive = false;
                     } else {
                         monsterInRoom.attackEnemy(hero);
@@ -248,43 +247,46 @@ public class DungeonGame implements Serializable {
                     break;
                 case 2:
                     System.out.println("You fled back to the room you came from.");
-                    updateHeroPosition(this.lastKnownHeroPosX,this.lastKnownHeroPosY);
+                    updateHeroPosition(this.lastKnownHeroPosX, this.lastKnownHeroPosY);
                     movement();
                     break;
                 case 3:
-                    /// metod for use item
-                    System.out.println("You healed"); // + hp regen
+                    ArrayList<Items> itemsInBackpack = hero.getBackpack().getItemsInBackpack();
+
+                    int index = 0;
+
+                    for (Items item : itemsInBackpack) {
+                        index++;
+                        System.out.println(index + "." + item + "\n");
+                    }
+                    System.out.println("Which item do you want to use?");
+                    int backpackUsage = scanner.nextInt();
+
+                    hero.getBackpack().getItemsInBackpack().get(backpackUsage).useItem();
+
+                    System.out.println("You healed up to " + hero.getHealth());
                     break;
             }
         }
-    }
+        }
 
     private void treasure() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("You found a treasure!");
 
+        String item = maze.getMazeRoom(hero.getPositionX(),hero.getPositionY()).getRoomItems().getName();
 
-        int randomNum = ThreadLocalRandom.current().nextInt(0, 50);
-        System.out.println("You found " + randomNum + " gold " + "\n" +
-                "Do you want to pick up gold? Y / N?");
-
-        // Slumpa ett item
-
-       /* int randomNum = ThreadLocalRandom.current().nextInt(0, itemArray.length + 1);
-        System.out.println("You found " + itemArray[randomNum] + "\n" +
+        System.out.println("You found " + item + "\n" +
                 "Do you want to pick up item? Y / N? ");
-*/
+
 
         String input = scanner.nextLine();
         if (input.toLowerCase().equals("y")) {
-
-            /*int gold = maze.getMazeRoom(hero.getPositionX(), hero.getPositionY().());
-            hero.addGold(gold);
-*/
-            System.out.println("Picked up gold " + randomNum);
+            System.out.println("Picked up item: " + item );
+            maze.getMazeRoom(hero.getPositionX(),hero.getPositionY()).setEmpty(true);
         } else if (input.toLowerCase().equals("n")) {
-            System.out.println("Left gold");
+            System.out.println("Left item");
         } else {
             System.out.println("You fucked up. " + "Lost 2 HP for being stupid ");
             hero.setHealth(hero.getHealth()-2);
@@ -314,21 +316,4 @@ public class DungeonGame implements Serializable {
             ex.printStackTrace();
         }
     }
-/*
-    @Override
-    public String toString() {
-        String outputString = "";
-
-
-        for (int i = 0; i < maze.getMazeArray().length; i++) {
-            for (int j = 0; j < maze.getMazeArray()[i].length; j++) {
-                if (i == hero.getPositionX() && j == hero.getPositionY()) {
-                    outputString += "H";
-                } else {
-                    outputString += " " + maze.getMazeArray()[i][j];
-                }
-            }
-        }
-        return outputString;
-    } */
 }

@@ -15,7 +15,7 @@ public class Maze {
     private int heroPositionY = 14;
 
 
-    public Maze(int i) {
+    public Maze() {
 
         Scanner scanner = new Scanner(System.in);
         while(true) {

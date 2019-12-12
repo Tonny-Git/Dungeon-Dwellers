@@ -251,24 +251,67 @@ public class DungeonGame implements Serializable {
                     movement();
                     break;
                 case 3:
-                    ArrayList<Items> itemsInBackpack = hero.getBackpack().getItemsInBackpack();
+                    heal();
 
-                    int index = 0;
-
-                    for (Items item : itemsInBackpack) {
-                        index++;
-                        System.out.println(index + "." + item + "\n");
-                    }
-                    System.out.println("Which item do you want to use?");
-                    int backpackUsage = scanner.nextInt();
-
-                    hero.getBackpack().getItemsInBackpack().get(backpackUsage).useItem();
-
-                    System.out.println("You healed up to " + hero.getHealth());
                     break;
             }
         }
         }
+
+        private void heal(){
+
+
+
+            ArrayList<Items> itemsInBackpack = hero.getBackpack().getItemsInBackpack();
+            Scanner scanner = new Scanner(System.in);
+            itemsInBackpack.add(0, new Beef());
+
+            if(itemsInBackpack.size() != 0){
+
+                int index = 0;
+
+                for (Items item : itemsInBackpack) {
+                    index++;
+                    System.out.println(index + "." + item + "\n");
+                }
+
+
+
+
+                System.out.println("Which item do you want to use?");
+                int backpackUsage = scanner.nextInt()-1;
+
+                try{ int useItem = itemsInBackpack.get(backpackUsage).useItem();
+                System.out.println(useItem);
+
+                if (hero.getHealth() + useItem < 100){
+
+                    hero.setHealth(hero.getHealth() + useItem);
+
+                }
+
+                else {hero.setHealth(100);}
+                
+                itemsInBackpack.remove(backpackUsage);
+
+
+
+
+
+                System.out.println("You healed up to " + hero.getHealth());}
+                catch (Exception e) {
+                    System.out.println("No item with that number found!");
+
+                }
+
+
+            }
+            else{
+                System.out.println("Backpack is empty \n");
+            }
+
+
+        };
 
     private void treasure() {
         Scanner scanner = new Scanner(System.in);

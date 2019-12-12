@@ -25,5 +25,5 @@ public abstract class Items {
         return name;
     }
 
-    public abstract void useItem();
+    public abstract int useItem();
 }

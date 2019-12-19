@@ -102,7 +102,7 @@ public class Room {
         switch (randomNumItem) {
             case 0:
                 item = new CupOfCoffee();
-                roomGold.add(item);
+                placeGoldRoom();
                 break;
             case 1:
                 item = new Potato();

@@ -177,7 +177,7 @@ public class DungeonGame implements Serializable {
 
     private void boss() {
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
+        String input;
 
         System.out.println(hero.getName() + " encountered The Elder Dragon!");
         if (hero.getTotalExp() >= 500 && hero.hasToothbrush()) {
@@ -191,6 +191,7 @@ public class DungeonGame implements Serializable {
                             "She wants you to find her toothbrush that's been lost in this dungeon." + "\n" +
                             "IF you retrieve it for her she will reward you greatly." + "\n" +
                             "Do you accept? Y/N");
+            input = scanner.nextLine();
             if (input.toLowerCase().equals("y")) {
                 if (keydropped < 1) {
                     //dropToothbrushSomewhereInDungeon();
@@ -204,6 +205,8 @@ public class DungeonGame implements Serializable {
             }
         }
     }
+
+    //Ta bort senare
 /*
     private void dropToothbrushSomewhereInDungeon() {
         boolean cont = false;

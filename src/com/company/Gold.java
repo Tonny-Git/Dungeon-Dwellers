@@ -6,7 +6,8 @@ public class Gold extends Items {
     }
 
     @Override
-    public void useItem() {
+    public int useItem() {
 
+        return 0;
     }
 }

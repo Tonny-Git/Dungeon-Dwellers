@@ -22,6 +22,7 @@ public class Backpack {
         return itemsInBackpack;
     }
 
+
     public void showContent(){
         System.out.println(itemsInBackpack);
     }

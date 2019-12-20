@@ -132,7 +132,7 @@ public class Maze {
                     mazePositions[i] = 2;
                 } else if (randomPositions.indexOf(i) < numOfMonster + numOfItems && randomPositions.indexOf(i) >= numOfMonster) {
                     mazePositions[i] = 3;
-                } else if (randomPositions.indexOf(i) < numOfMonster + numOfItems + numOfMonsterAndItems && randomPositions.indexOf(i) >= numOfMonster + numOfItems) {
+                } else if (randomPositions.indexOf(i) < numOfMonster + numOfItems + numOfMonsterAndItems &&  randomPositions.indexOf(i) >= numOfMonster + numOfItems) {
                     mazePositions[i] = 4;
                 } else if (randomPositions.indexOf(i) == randomPositions.size() - 2) {
                     mazePositions[i] = 5;
@@ -259,6 +259,104 @@ public class Maze {
 
         return tempArray;
     }
+
+    public ArrayList<Integer> randomizeWalls2() {
+        ArrayList<Integer> tempArray = new ArrayList<>();
+        int size = mapSize;
+        int[][] twoDTempArray = new int[size][size];
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                twoDTempArray[i][j] = 1;
+            }
+        }
+
+        for (int i = 0; i < size/3; i++) {
+            int num1 = (int)Math.floor(Math.random()*size);
+            int num2 = (int)Math.floor(Math.random()*size);
+            int totalNum = num1*size + num2;
+            boolean skip = false;
+
+            if (totalNum % size == 0 || totalNum % size == size - 1 || totalNum < size || totalNum > size * size - size) {
+                i--;
+                continue;
+            }
+
+            for (int j = -2; j < 3; j++) {
+                for (int k = -2; k < 3; k++) {
+                    try {
+                        if (twoDTempArray[num1+j][num2+k] == 0) {
+                            skip = true;
+                            break;
+                        }
+                    } catch (Exception e) {
+
+                    }
+                }
+            }
+
+            if(skip) {
+                i--;
+                continue;
+            }
+
+            for (int j = -1; j < 2; j++) {
+                for (int k = -1; k < 2; k++) {
+                    if(j == 0 && k == 0) {
+
+                    } else {
+                        twoDTempArray[num1+j][num2+k] = 0;
+                    }
+                }
+            }
+
+            for (int j = 0; j < 1; j++) {
+                int randomOpening = (int)Math.floor(Math.random()*4);
+                switch (randomOpening) {
+                    case 0:
+                        if(num1 == 1 || num1 == 2) {
+                            j--;
+                            continue;
+                        }
+                        twoDTempArray[num1-1][num2] = 1;
+                        break;
+                    case 1:
+                        if(num2 == 1 || num2 == 2) {
+                            j--;
+                            continue;
+                        }
+                        twoDTempArray[num1][num2-1] = 1;
+                        break;
+                    case 2:
+                        if(num2 == size-2 || num2 == size-3) {
+                            j--;
+                            continue;
+                        }
+                        twoDTempArray[num1][num2+1] = 1;
+                        break;
+                    case 3:
+                        if(num1 == size-2 || num1 == size-3) {
+                            j--;
+                            continue;
+                        }
+                        twoDTempArray[num1+1][num2] = 1;
+                        break;
+                }
+            }
+        }
+
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if(twoDTempArray[i][j] == 0) {
+                    tempArray.add(i*size + j);
+                }
+            }
+        }
+
+        return tempArray;
+    }
+
 
     public void createMap() {
         int numPos = 0;
